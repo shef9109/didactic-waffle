@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Темы — Кузница Анкет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/sheet.css">
+    <style>
+        .themes-wrap { max-width: 1100px; margin: 0 auto; padding: 50px 40px 80px; }
+
+        .themes-hero { text-align: center; margin-bottom: 50px; }
+        .themes-hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .theme-card {
+            border: 1px solid var(--panel-border);
+            background: var(--panel-solid);
+            overflow: hidden;
+            transition: border-color var(--tr), transform var(--tr);
+            cursor: pointer;
+        }
+        .theme-card:hover {
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        .theme-card.active { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+
+        .theme-card-preview {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Мини-превью тем */
+        .preview-medieval { background: linear-gradient(160deg, #f8edcc 0%, #dcc880 100%); }
+        .preview-arcane    { background: linear-gradient(160deg, #181028 0%, #0e0818 100%); }
+        .preview-nordic    { background: linear-gradient(160deg, #ede0ca 0%, #c8b07a 100%); }
+        .preview-oriental  { background: linear-gradient(160deg, #fef5e4 0%, #e8cc88 100%); }
+
+        .preview-label-text {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+        }
+        .preview-medieval .preview-label-text { color: #1a1208; text-shadow: 2px 2px 0 rgba(139,90,20,.2); }
+        .preview-arcane   .preview-label-text { color: #e0d0ff; text-shadow: 0 0 20px rgba(160,100,255,.5); }
+        .preview-nordic   .preview-label-text { color: #1a1008; }
+        .preview-oriental .preview-label-text { color: #1a0808; }
+
+        .preview-bar {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 6px;
+        }
+        .preview-medieval .preview-bar { background: linear-gradient(to right, #8a6e28, #c8a84b, #8a6e28); }
+        .preview-arcane   .preview-bar { background: linear-gradient(to right, #4030a0, #9060d0, #4030a0); }
+        .preview-nordic   .preview-bar { background: linear-gradient(to right, #5a4010, #8a6828, #5a4010); }
+        .preview-oriental .preview-bar { background: linear-gradient(to right, #8a2808, #c04010, #8a2808); }
+
+        .theme-card-info {
+            padding: 18px 22px;
+            border-top: 1px solid var(--panel-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .theme-card-name {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-bright);
+        }
+        .theme-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 3px;
+        }
+        .theme-card-badge {
+            font-family: var(--font-heading);
+            font-size: 0.52rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border: 1px solid var(--gold-dark);
+            color: var(--gold-dark);
+            white-space: nowrap;
+        }
+        .theme-card.active .theme-card-badge {
+            background: rgba(139,90,20,0.15);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .themes-action {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">⚔</span> Кузница Анкет
+    </a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Главная</a></li>
+        <li><a href="generator.html">Генератор</a></li>
+        <li><a href="themes.html" class="active">Темы</a></li>
+        <li><a href="about.html">О проекте</a></li>
+    </ul>
+</nav>
+
+<div class="themes-wrap">
+
+    <div class="themes-hero">
+        <h1>Темы оформления</h1>
+        <div class="ornament-divider" style="max-width:320px;margin:14px auto 16px">
+            <span>Выбери стиль анкеты</span>
+        </div>
+        <p style="color:var(--text-dim);font-style:italic">
+            Каждая тема меняет цветовую схему, текстуру и атмосферу анкеты.
+        </p>
+    </div>
+
+    <div class="themes-grid">
+
+        <div class="theme-card active" data-theme="medieval" onclick="selectTheme('medieval')">
+            <div class="theme-card-preview preview-medieval">
+                <div class="preview-label-text">MEDIEVAL</div>
+                <div class="preview-bar"></div>
+            </div>
+            <div class="theme-card-info">
+                <div>
+                    <div class="theme-card-name">Средневековье</div>
+                    <div class="theme-card-desc">Пергамент, золото, тёмные чернила</div>
+                </div>
+                <div class="theme-card-badge">Активна</div>
+            </div>
+        </div>
+
+        <div class="theme-card" data-theme="arcane" onclick="selectTheme('arcane')">
+            <div class="theme-card-preview preview-arcane">
+                <div class="preview-label-text">ARCANE</div>
+                <div class="preview-bar"></div>
+            </div>
+            <div class="theme-card-info">
+                <div>
+                    <div class="theme-card-name">Магическая</div>
+                    <div class="theme-card-desc">Глубокий фиолет, пурпурное золото</div>
+                </div>
+                <div class="theme-card-badge">Выбрать</div>
+            </div>
+        </div>
+
+        <div class="theme-card" data-theme="nordic" onclick="selectTheme('nordic')">
+            <div class="theme-card-preview preview-nordic">
+                <div class="preview-label-text">NORDIC</div>
+                <div class="preview-bar"></div>
+            </div>
+            <div class="theme-card-info">
+                <div>
+                    <div class="theme-card-name">Северная</div>
+                    <div class="theme-card-desc">Выветренный пергамент, янтарь</div>
+                </div>
+                <div class="theme-card-badge">Выбрать</div>
+            </div>
+        </div>
+
+        <div class="theme-card" data-theme="oriental" onclick="selectTheme('oriental')">
+            <div class="theme-card-preview preview-oriental">
+                <div class="preview-label-text">ORIENTAL</div>
+                <div class="preview-bar"></div>
+            </div>
+            <div class="theme-card-info">
+                <div>
+                    <div class="theme-card-name">Восточная</div>
+                    <div class="theme-card-desc">Слоновая кость, красный лак</div>
+                </div>
+                <div class="theme-card-badge">Выбрать</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="themes-action">
+        <a href="generator.html" class="btn btn-primary btn-lg" id="go-generator">
+            Открыть генератор с этой темой →
+        </a>
+    </div>
+
+</div>
+
+<script>
+    let selectedTheme = 'medieval';
+
+    function selectTheme(id) {
+        selectedTheme = id;
+        document.querySelectorAll('.theme-card').forEach(card => {
+            const isActive = card.dataset.theme === id;
+            card.classList.toggle('active', isActive);
+            card.querySelector('.theme-card-badge').textContent = isActive ? 'Активна' : 'Выбрать';
+        });
+        const link = document.getElementById('go-generator');
+        link.href = `generator.html?theme=${id}`;
+    }
+</script>
+
+</body>
+</html>

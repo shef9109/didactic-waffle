@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════════════════════════════
+   ТЕМА: ORIENTAL — Восточная / Свитки
+   Тёплый слоновый оттенок, красный лак, золото на закате.
+═══════════════════════════════════════════════════════════════ */
+
+[data-theme="oriental"] .sheet,
+.theme-oriental .sheet {
+    background: linear-gradient(160deg,
+    #fef5e4 0%,
+    #f5e8c8 30%,
+    #f0dca8 65%,
+    #e8cc88 100%
+    );
+    box-shadow:
+            0 0 0 1px #8a2808,
+            0 0 0 5px #0a0402,
+            0 0 0 7px #8a2808,
+            0 0 0 8px #060402,
+            0 0 80px rgba(0,0,0,0.95),
+            inset 0 0 100px rgba(180,60,10,0.05);
+}
+
+[data-theme="oriental"] .sh-header,
+.theme-oriental .sh-header { border-bottom-color: #8a2808; }
+
+[data-theme="oriental"] .sh-order-tag,
+.theme-oriental .sh-order-tag { color: #8a2808; }
+
+[data-theme="oriental"] .sh-name,
+.theme-oriental .sh-name {
+    color: #1a0808;
+    text-shadow: 2px 3px 0 rgba(138,40,8,0.15);
+    letter-spacing: 0.08em;
+}
+
+[data-theme="oriental"] .sh-divider::before,
+[data-theme="oriental"] .sh-divider::after,
+.theme-oriental .sh-divider::before,
+.theme-oriental .sh-divider::after {
+    background: linear-gradient(to right, transparent, #8a2808, transparent);
+}
+[data-theme="oriental"] .sh-divider span,
+.theme-oriental .sh-divider span { color: #8a2808; }
+
+[data-theme="oriental"] .sh-subtitle,
+.theme-oriental .sh-subtitle { color: #3a1808; }
+
+[data-theme="oriental"] .sh-seal-circle,
+.theme-oriental .sh-seal-circle {
+    background: radial-gradient(circle, #8a1808 0%, #4a0804 100%);
+    border-color: #8a2808;
+}
+[data-theme="oriental"] .sh-seal-circle svg,
+.theme-oriental .sh-seal-circle svg { fill: #f8c060; }
+[data-theme="oriental"] .sh-seal-label,
+.theme-oriental .sh-seal-label { color: #8a2808; }
+
+[data-theme="oriental"] .sh-alignment,
+.theme-oriental .sh-alignment {
+    background: linear-gradient(135deg, #1a0808 0%, #2a1008 100%);
+    border-left-color: #c04010;
+}
+[data-theme="oriental"] .sh-align-label,
+.theme-oriental .sh-align-label { color: #c04010; }
+[data-theme="oriental"] .sh-align-value,
+.theme-oriental .sh-align-value { color: #fff8f0; }
+[data-theme="oriental"] .sh-align-desc,
+.theme-oriental .sh-align-desc { color: #d0a888; }
+
+[data-theme="oriental"] .sh-stats,
+.theme-oriental .sh-stats { background: #8a2808; border-color: #8a2808; }
+[data-theme="oriental"] .sh-stat,
+.theme-oriental .sh-stat {
+    background: linear-gradient(160deg, #fef0d0 0%, #f0d898 100%);
+}
+[data-theme="oriental"] .sh-stat-val,
+.theme-oriental .sh-stat-val { color: #1a0808; }
+[data-theme="oriental"] .sh-stat-lbl,
+.theme-oriental .sh-stat-lbl { color: #8a2808; }
+
+[data-theme="oriental"] .sh-section-title,
+.theme-oriental .sh-section-title { color: #8a2808; }
+[data-theme="oriental"] .sh-section-hdr::after,
+.theme-oriental .sh-section-hdr::after { background: linear-gradient(to right, #8a2808, transparent); }
+
+[data-theme="oriental"] .sh-text,
+.theme-oriental .sh-text { color: #2a1008; }
+[data-theme="oriental"] .sh-equip-bullet,
+.theme-oriental .sh-equip-bullet { color: #8a2808; }
+[data-theme="oriental"] .sh-equip-name,
+.theme-oriental .sh-equip-name { color: #1a0808; }
+[data-theme="oriental"] .sh-equip-item,
+.theme-oriental .sh-equip-item { color: #2a1008; }
+
+[data-theme="oriental"] .sh-quote,
+.theme-oriental .sh-quote {
+    border-left-color: #8a2808;
+    background: rgba(138,40,8,0.06);
+    color: #1a0808;
+}
+
+[data-theme="oriental"] .sh-footer,
+.theme-oriental .sh-footer { border-top-color: #8a2808; }
+[data-theme="oriental"] .sh-footer-text,
+.theme-oriental .sh-footer-text { color: #8a2808; }
+[data-theme="oriental"] .sh-footer-seal,
+.theme-oriental .sh-footer-seal { background: #8a2808; }

@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════════════════════════
+   КУЗНИЦА АНКЕТ — sheet.css
+   Стили пергаментной анкеты. Используется в generator.html
+   и в экспортируемом HTML. Не зависит от интерфейса.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── ОБЁРТКА ── */
+.sheet {
+    width: 760px;
+    position: relative;
+    background:
+            linear-gradient(160deg, #f8edcc 0%, #ecdfa0 30%, #f0e0b0 65%, #d8c280 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    box-shadow:
+            0 0 0 1px var(--gold-dark),
+            0 0 0 5px #130e06,
+            0 0 0 7px var(--gold-dark),
+            0 0 0 8px #0a0702,
+            0 0 80px rgba(0,0,0,0.95),
+            inset 0 0 100px rgba(139,90,20,0.06);
+    animation: sheetReveal 0.5s ease-out both;
+}
+
+@keyframes sheetReveal {
+    from { opacity: 0; transform: scale(0.984) translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ── УГЛОВЫЕ ОРНАМЕНТЫ ── */
+.sh-corner {
+    position: absolute;
+    width: 58px; height: 58px;
+    pointer-events: none;
+    z-index: 10;
+}
+.sh-corner svg { width: 100%; height: 100%; }
+.c-tl { top: 8px;    left: 8px; }
+.c-tr { top: 8px;    right: 8px;    transform: scaleX(-1); }
+.c-bl { bottom: 8px; left: 8px;    transform: scaleY(-1); }
+.c-br { bottom: 8px; right: 8px;   transform: scale(-1); }
+
+/* ── ШАПКА ── */
+.sh-header {
+    padding: 44px 58px 26px;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-dark);
+    position: relative;
+}
+
+.sh-order-tag {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    letter-spacing: 0.42em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.85;
+}
+
+.sh-name {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 3px 0 rgba(139,90,20,0.18);
+    word-break: break-word;
+}
+
+.sh-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 12px 0;
+}
+.sh-divider::before,
+.sh-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+}
+.sh-divider span {
+    font-family: var(--font-heading);
+    font-size: 0.6rem;
+    letter-spacing: 0.42em;
+    color: var(--blood);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sh-subtitle {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+}
+
+/* ── ПЕЧАТЬ ОРДЕНА ── */
+.sh-seal {
+    position: absolute;
+    top: 28px;
+    right: 50px;
+    transform: rotate(-8deg);
+}
+.sh-seal-circle {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #7a1c1c 0%, #3a0a0a 100%);
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--gold-dark);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
+}
+.sh-seal-circle svg { width: 40px; height: 40px; fill: var(--gold-light); }
+.sh-seal-label {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    letter-spacing: 0.18em;
+    color: var(--gold-dark);
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+/* ── ТЕЛО АНКЕТЫ ── */
+.sh-body { padding: 24px 54px 44px; }
+
+/* ── ПОЛОСА МИРОВОЗЗРЕНИЯ ── */
+.sh-alignment {
+    background: linear-gradient(135deg, #1a1208 0%, #2a1e0e 100%);
+    padding: 13px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    border-left: 4px solid var(--gold);
+    box-shadow: inset 0 1px 0 rgba(200,168,75,0.1);
+}
+.sh-align-icon   { font-size: 24px; flex-shrink: 0; line-height: 1; }
+.sh-align-label  {
+    font-family: var(--font-heading);
+    font-size: 0.52rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+.sh-align-value  {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    color: var(--text-white);
+    font-weight: 700;
+}
+.sh-align-desc {
+    margin-left: auto;
+    text-align: right;
+    color: var(--parchment-dark);
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    max-width: 200px;
+}
+
+/* ── ХАРАКТЕРИСТИКИ ── */
+.sh-stats {
+    display: grid;
+    gap: 1px;
+    background: var(--gold-dark);
+    border: 1px solid var(--gold-dark);
+    margin-bottom: 24px;
+}
+.sh-stat {
+    background: linear-gradient(160deg, #f5e8b0 0%, #e8d080 100%);
+    padding: 11px 6px;
+    text-align: center;
+}
+.sh-stat-val {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+}
+.sh-stat-lbl {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    letter-spacing: 0.18em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ── ДВУХКОЛОНОЧНАЯ СЕКЦИЯ ── */
+.sh-two-col {
+    display: grid;
+    gap: 28px;
+    margin-bottom: 20px;
+}
+
+/* ── СЕКЦИЯ С ЗАГОЛОВКОМ ── */
+.sh-section { margin-bottom: 18px; }
+
+.sh-section-hdr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 7px;
+}
+.sh-section-hdr::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dark), transparent);
+    opacity: 0.4;
+}
+.sh-section-icon  { font-size: 13px; opacity: 0.55; line-height: 1; }
+.sh-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.56rem;
+    letter-spacing: 0.3em;
+    color: var(--blood);
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.sh-text {
+    font-size: 0.94rem;
+    line-height: 1.75;
+    color: var(--ink-light);
+}
+
+/* ── СНАРЯЖЕНИЕ ── */
+.sh-equip-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-light);
+}
+.sh-equip-bullet {
+    flex-shrink: 0;
+    color: var(--gold-dark);
+    font-size: 1rem;
+    line-height: 1.55;
+    width: 18px;
+    text-align: center;
+}
+.sh-equip-name {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 1px;
+}
+
+/* ── ИТОГОВАЯ ЦИТАТА ── */
+.sh-quote {
+    border-left: 3px solid var(--gold-dark);
+    padding: 10px 18px;
+    margin: 16px 0;
+    background: rgba(139,90,20,0.055);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.75;
+}
+
+/* ── ПОДВАЛ АНКЕТЫ ── */
+.sh-footer {
+    border-top: 1px solid var(--gold-dark);
+    padding: 15px 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sh-footer-text {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+}
+.sh-footer-seal {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gold-dark);
+    opacity: 0.35;
+}
+
+/* ══════════════════════════════════════════════
+   SVG ОРНАМЕНТЫ (вставляются через JS)
+══════════════════════════════════════════════ */
+
+/* Стили для тем переопределяют переменные ниже */
+.sheet[data-theme="medieval"] { /* дефолт — ничего дополнительного */ }
+
+.sheet[data-theme="arcane"] {
+    background: linear-gradient(160deg, #1a1228 0%, #0e0818 50%, #150e20 100%);
+    color: #d0c0f0;
+    --ink: #d0c0f0;
+    --ink-light: #b0a0d0;
+    --gold: #9060d0;
+    --gold-dark: #6040a0;
+    --gold-light: #c090ff;
+    --blood: #4040a0;
+    --parchment-dark: #604080;
+}
+
+.sheet[data-theme="nordic"] {
+    background: linear-gradient(160deg, #e8e0d0 0%, #d8ceb8 40%, #e0d4b8 100%);
+    --gold: #8a6a28;
+    --gold-dark: #5a4010;
+    --blood: #5a1010;
+}
+
+.sheet[data-theme="oriental"] {
+    background: linear-gradient(160deg, #fdf0e0 0%, #f0e0c0 50%, #e8d0a0 100%);
+    --gold: #c04000;
+    --gold-dark: #8a2800;
+    --blood: #800000;
+}

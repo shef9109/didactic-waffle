@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кузница Анкет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+
+        /* ══════════════════════════════════════════
+           ФОНОВЫЕ СЛОИ
+        ══════════════════════════════════════════ */
+        body { overflow-x: hidden; }
+
+        /* Звёздный/искровой фон */
+        .bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                    radial-gradient(ellipse 90% 70% at 50% -10%, rgba(80,40,8,0.7)  0%, transparent 60%),
+                    radial-gradient(ellipse 60% 50% at 15% 50%,  rgba(50,25,5,0.4)  0%, transparent 55%),
+                    radial-gradient(ellipse 50% 60% at 85% 80%,  rgba(40,15,5,0.3)  0%, transparent 50%),
+                    #07040100;
+            background-color: #07040100;
+        }
+
+        /* Геометрический SVG орнамент */
+        .bg-ornament {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(900px, 120vw);
+            height: min(900px, 120vw);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.06;
+            animation: slowRotate 120s linear infinite;
+        }
+        @keyframes slowRotate {
+            from { transform: translate(-50%,-50%) rotate(0deg); }
+            to   { transform: translate(-50%,-50%) rotate(360deg); }
+        }
+
+        /* Мерцающие частицы */
+        .sparks {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .spark {
+            position: absolute;
+            width: 2px; height: 2px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0;
+            animation: sparkle var(--dur, 4s) var(--delay, 0s) ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%,100% { opacity: 0; transform: scale(0); }
+            50%      { opacity: 0.7; transform: scale(1); }
+        }
+
+        /* ══════════════════════════════════════════
+           КОНТЕНТ
+        ══════════════════════════════════════════ */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 40px 60px;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-heading);
+            font-size: 0.58rem;
+            letter-spacing: 0.55em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            opacity: 0;
+            animation: riseUp 0.9s 0.2s ease both;
+        }
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            width: 40px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dark));
+        }
+        .hero-eyebrow::after { transform: scaleX(-1); }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 8vw, 6.5rem);
+            font-weight: 900;
+            color: transparent;
+            background: linear-gradient(
+                    180deg,
+                    var(--gold-light) 0%,
+                    var(--gold)       40%,
+                    var(--gold-dark)  100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            line-height: 1.02;
+            letter-spacing: 0.04em;
+            filter: drop-shadow(0 0 40px rgba(200,168,75,0.25));
+            opacity: 0;
+            animation: riseUp 1s 0.35s ease both;
+        }
+
+        .hero-sub-line {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 26px auto;
+            max-width: 500px;
+            opacity: 0;
+            animation: riseUp 0.8s 0.55s ease both;
+        }
+        .hero-sub-line::before,
+        .hero-sub-line::after {
+            content: '';
+            flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+        }
+        .hero-sub-line span {
+            font-family: var(--font-heading);
+            font-size: 0.6rem;
+            letter-spacing: 0.42em;
+            color: var(--blood);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .hero-desc {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            line-height: 1.85;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: riseUp 0.8s 0.7s ease both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: riseUp 0.8s 0.85s ease both;
+        }
+
+        /* Стрелка вниз */
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-heading);
+            font-size: 0.52rem;
+            letter-spacing: 0.3em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: riseUp 0.8s 1.2s ease both, heroScroll 2.5s 2s ease-in-out infinite;
+        }
+        .hero-scroll::after {
+            content: '↓';
+            font-size: 1rem;
+            color: var(--gold-dark);
+        }
+        @keyframes heroScroll {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(6px); }
+        }
+
+        @keyframes riseUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── СЕКЦИЯ ТИПОВ ── */
+        .types-section {
+            padding: 20px 48px 100px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-size: 0.62rem;
+            letter-spacing: 0.45em;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+        .section-header p {
+            font-style: italic;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--panel-border);
+            border: 1px solid var(--panel-border);
+            max-width: 1100px;
+            margin: 0 auto;
+            box-shadow:
+                    0 0 0 1px rgba(139,90,20,0.2),
+                    0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        .type-card {
+            background: var(--panel-solid);
+            padding: 34px 28px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: background var(--tr);
+            overflow: hidden;
+        }
+        .type-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+        }
+        .type-card:hover { background: var(--panel-light); }
+        .type-card:hover::before { transform: scaleX(1); }
+
+        .type-card--highlight {
+            background: linear-gradient(160deg, #1c1710 0%, #141008 100%);
+            box-shadow: inset 0 0 0 1px rgba(139,90,20,0.2);
+        }
+        .type-card--highlight::before {
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        .type-card--soon {
+            cursor: default;
+            opacity: 0.5;
+        }
+        .type-card--soon:hover { background: var(--panel-solid); }
+        .type-card--soon::before { display: none; }
+
+        .type-icon {
+            font-size: 2rem;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .type-title {
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-bright);
+        }
+        .type-role {
+            font-family: var(--font-heading);
+            font-size: 0.54rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--blood);
+        }
+        .type-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+            flex: 1;
+        }
+
+        .type-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .type-tag {
+            font-family: var(--font-heading);
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold-dim);
+        }
+
+        .type-arrow {
+            align-self: flex-end;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: var(--gold-dark);
+            transition: transform var(--tr), color var(--tr);
+            margin-top: 6px;
+        }
+        .type-card:not(.type-card--soon):hover .type-arrow {
+            transform: translateX(5px);
+            color: var(--gold);
+        }
+
+        /* ── ПОДВАЛ ── */
+        .site-footer {
+            border-top: 1px solid var(--panel-border);
+            padding: 36px 40px;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+        .site-footer p {
+            font-family: var(--font-heading);
+            font-size: 0.54rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* Адаптив */
+        @media (max-width: 960px) {
+            .types-grid { grid-template-columns: repeat(2,1fr); }
+            .types-section { padding: 20px 24px 70px; }
+        }
+        @media (max-width: 600px) {
+            .types-grid { grid-template-columns: 1fr; }
+            .hero { padding: 60px 24px 50px; }
+            .nav { padding: 0 20px; }
+            .nav-links a { padding: 6px 8px; font-size: 0.52rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── ФОН ─── -->
+<div class="bg-canvas"></div>
+
+<svg class="bg-ornament" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="400" cy="400" r="380" stroke="#c8a84b" stroke-width="0.6"/>
+    <circle cx="400" cy="400" r="300" stroke="#c8a84b" stroke-width="0.4"/>
+    <circle cx="400" cy="400" r="220" stroke="#c8a84b" stroke-width="0.6"/>
+    <circle cx="400" cy="400" r="140" stroke="#c8a84b" stroke-width="0.4"/>
+    <polygon points="400,20 780,590 20,590" stroke="#c8a84b" stroke-width="0.5" fill="none"/>
+    <polygon points="400,780 780,210 20,210" stroke="#c8a84b" stroke-width="0.5" fill="none"/>
+    <line x1="400" y1="0"   x2="400" y2="800" stroke="#c8a84b" stroke-width="0.3"/>
+    <line x1="0"   y1="400" x2="800" y2="400" stroke="#c8a84b" stroke-width="0.3"/>
+    <line x1="0"   y1="0"   x2="800" y2="800" stroke="#c8a84b" stroke-width="0.25"/>
+    <line x1="800" y1="0"   x2="0"   y2="800" stroke="#c8a84b" stroke-width="0.25"/>
+    <circle cx="400" cy="400" r="6" fill="#c8a84b" opacity="0.5"/>
+    <circle cx="400" cy="20"  r="3" fill="#c8a84b" opacity="0.4"/>
+    <circle cx="400" cy="780" r="3" fill="#c8a84b" opacity="0.4"/>
+    <circle cx="20"  cy="400" r="3" fill="#c8a84b" opacity="0.4"/>
+    <circle cx="780" cy="400" r="3" fill="#c8a84b" opacity="0.4"/>
+</svg>
+
+<div class="sparks" id="sparks"></div>
+
+<!-- ─── КОНТЕНТ ─── -->
+<div class="page-wrap">
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">⚔</span> Кузница Анкет
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Главная</a></li>
+            <li><a href="pages/generator.html">Генератор</a></li>
+            <li><a href="pages/themes.html">Темы</a></li>
+            <li><a href="pages/about.html">О проекте</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-eyebrow">Мастерская персонажей</div>
+
+        <h1 class="hero-title">Кузница<br>Анкет</h1>
+
+        <div class="hero-sub-line">
+            <span>Выбери тип анкеты</span>
+        </div>
+
+        <p class="hero-desc">
+            Создай анкету персонажа для любой ролевой системы.<br>
+            Настрой поля, выбери тему, скачай готовый документ.
+        </p>
+
+        <div class="hero-cta">
+            <a href="pages/generator.html" class="btn btn-primary btn-xl">
+                ⚔ Открыть генератор
+            </a>
+            <a href="pages/themes.html" class="btn btn-outline btn-lg">
+                Темы оформления
+            </a>
+        </div>
+
+        <div class="hero-scroll">Листай вниз</div>
+    </section>
+
+    <!-- ТИПЫ АНКЕТ -->
+    <section class="types-section">
+        <div class="section-header">
+            <h2>Типы анкет</h2>
+            <div class="ornament-divider" style="max-width:300px;margin:12px auto">
+                <span>Выбери свой путь</span>
+            </div>
+            <p>Каждый тип предлагает набор подходящих полей и структуру</p>
+        </div>
+
+        <div class="types-grid">
+
+            <a href="pages/generator.html?type=roleplay" class="type-card">
+                <div class="type-icon">⚔</div>
+                <div class="type-title">Ролевая</div>
+                <div class="type-role">Для настольных RPG</div>
+                <p class="type-desc">Характеристики, снаряжение, мировоззрение, история. Подходит для D&D, Pathfinder, авторских систем.</p>
+                <div class="type-tags">
+                    <span class="type-tag">D&D 5e</span>
+                    <span class="type-tag">Pathfinder</span>
+                    <span class="type-tag">Своя система</span>
+                </div>
+                <div class="type-arrow">→</div>
+            </a>
+
+            <a href="pages/generator.html?type=guild" class="type-card">
+                <div class="type-icon">🛡</div>
+                <div class="type-title">Гильдейская</div>
+                <div class="type-role">Досье члена гильдии</div>
+                <p class="type-desc">Ранг, специализация, выполненные задания, репутация. Для торговых домов, орденов, воровских гильдий.</p>
+                <div class="type-tags">
+                    <span class="type-tag">Орден</span>
+                    <span class="type-tag">Гильдия</span>
+                    <span class="type-tag">Братство</span>
+                </div>
+                <div class="type-arrow">→</div>
+            </a>
+
+            <a href="pages/generator.html?type=combat" class="type-card">
+                <div class="type-icon">🗡</div>
+                <div class="type-title">Боевая</div>
+                <div class="type-role">Упор на механику боя</div>
+                <p class="type-desc">Боевые навыки, оружие, доспехи, тактические особенности. Компактный формат для сражений.</p>
+                <div class="type-tags">
+                    <span class="type-tag">Воин</span>
+                    <span class="type-tag">Тактика</span>
+                    <span class="type-tag">Арсенал</span>
+                </div>
+                <div class="type-arrow">→</div>
+            </a>
+
+            <a href="pages/generator.html?type=arcane" class="type-card">
+                <div class="type-icon">✦</div>
+                <div class="type-title">Магическая</div>
+                <div class="type-role">Для магов и чародеев</div>
+                <p class="type-desc">Школы магии, заклинания, источник силы, артефакты. Для тех, чья сила в знаниях и волшбе.</p>
+                <div class="type-tags">
+                    <span class="type-tag">Заклинания</span>
+                    <span class="type-tag">Артефакты</span>
+                    <span class="type-tag">Школа</span>
+                </div>
+                <div class="type-arrow">→</div>
+            </a>
+
+            <a href="pages/generator.html?type=free" class="type-card type-card--highlight">
+                <div class="type-icon">◈</div>
+                <div class="type-title">Свободная</div>
+                <div class="type-role">Полная настройка</div>
+                <p class="type-desc">Сам решаешь какие поля нужны. Добавляй и удаляй характеристики и снаряжение без ограничений.</p>
+                <div class="type-tags">
+                    <span class="type-tag">Любая система</span>
+                    <span class="type-tag">Гибко</span>
+                </div>
+                <div class="type-arrow">→</div>
+            </a>
+
+            <div class="type-card type-card--soon">
+                <div class="type-icon">⚗</div>
+                <div class="type-title">Алхимик</div>
+                <div class="type-role">Скоро</div>
+                <p class="type-desc">Рецепты зелий, ингредиенты, лаборатория. В разработке.</p>
+                <div class="type-tags">
+                    <span class="type-tag">В разработке</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer">
+        <div class="ornament-divider" style="max-width:360px;margin:0 auto 16px">
+            <span>Кузница Анкет</span>
+        </div>
+        <p>Открытый проект · Только HTML, CSS и JS · GitHub Pages</p>
+    </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- Генерация искр -->
+<script>
+    (function() {
+        const container = document.getElementById('sparks');
+        for (let i = 0; i < 40; i++) {
+            const s = document.createElement('div');
+            s.className = 'spark';
+            s.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          --dur: ${3 + Math.random() * 5}s;
+          --delay: ${Math.random() * 6}s;
+          width: ${1 + Math.random() * 2}px;
+          height: ${1 + Math.random() * 2}px;
+          opacity: 0;
+        `;
+            container.appendChild(s);
+        }
+    })();
+</script>
+
+</body>
+</html>

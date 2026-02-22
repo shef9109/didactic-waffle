@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "theme": "medieval",
+    "system": "free",
+    "type": "roleplay"
+  },
+  "character": {
+    "name": "",
+    "class": "",
+    "order": "",
+    "quote": "",
+    "alignment": "",
+    "alignDesc": "",
+    "personality": "",
+    "physical": "",
+    "skills": "",
+    "finalQuote": "",
+    "footer": ""
+  },
+  "stats": [
+    { "name": "Сила",    "val": "" },
+    { "name": "Ловкость","val": "" },
+    { "name": "Разум",   "val": "" },
+    { "name": "Удача",   "val": "" }
+  ],
+  "equips": [
+    { "name": "", "desc": "" }
+  ]
+}

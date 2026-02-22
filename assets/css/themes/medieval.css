@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════════════════════════════
+   ТЕМА: MEDIEVAL — Средневековье (дефолтная)
+   Пергамент, золото, тёмные чернила, кровавые акценты.
+═══════════════════════════════════════════════════════════════ */
+
+[data-theme="medieval"] .sheet,
+.theme-medieval .sheet {
+    background: linear-gradient(160deg,
+    #f8edcc 0%,
+    #ecdfa0 28%,
+    #f0e0b0 62%,
+    #d8c280 100%
+    );
+
+    --sh-ink:        #1a1208;
+    --sh-ink-light:  #3a2c12;
+    --sh-gold:       #c8a84b;
+    --sh-gold-dark:  #8a6e28;
+    --sh-gold-light: #e8c96b;
+    --sh-blood:      #7a1c1c;
+    --sh-parchment-dark: #d9c99a;
+    --sh-text-white: #faf6ed;
+}
+
+[data-theme="medieval"] .sh-name,
+.theme-medieval .sh-name {
+    text-shadow: 2px 3px 0 rgba(139,90,20,0.18);
+}
+
+[data-theme="medieval"] .sh-stat,
+.theme-medieval .sh-stat {
+    background: linear-gradient(160deg, #f5e8b0 0%, #e8d080 100%);
+}

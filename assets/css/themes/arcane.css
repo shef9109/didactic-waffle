@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════════════════
+   ТЕМА: ARCANE — Магическая / Тёмная
+   Глубокий фиолетово-чёрный фон, пурпурное золото.
+═══════════════════════════════════════════════════════════════ */
+
+[data-theme="arcane"] .sheet,
+.theme-arcane .sheet {
+    background: linear-gradient(160deg,
+    #181028 0%,
+    #0e0818 45%,
+    #160e24 100%
+    );
+    box-shadow:
+            0 0 0 1px #6040a0,
+            0 0 0 5px #050308,
+            0 0 0 7px #6040a0,
+            0 0 0 8px #020106,
+            0 0 80px rgba(0,0,0,0.98),
+            inset 0 0 100px rgba(80,40,140,0.08),
+            0 0 60px rgba(96,64,160,0.12);
+}
+
+[data-theme="arcane"] .sh-header,
+.theme-arcane .sh-header {
+    border-bottom-color: #6040a0;
+}
+
+[data-theme="arcane"] .sh-order-tag,
+.theme-arcane .sh-order-tag {
+    color: #8060c0;
+}
+
+[data-theme="arcane"] .sh-name,
+.theme-arcane .sh-name {
+    color: #e0d0ff;
+    text-shadow: 0 0 30px rgba(160,100,255,0.3), 2px 3px 0 rgba(0,0,0,0.5);
+}
+
+[data-theme="arcane"] .sh-divider::before,
+[data-theme="arcane"] .sh-divider::after,
+.theme-arcane .sh-divider::before,
+.theme-arcane .sh-divider::after {
+    background: linear-gradient(to right, transparent, #6040a0, transparent);
+}
+
+[data-theme="arcane"] .sh-divider span,
+.theme-arcane .sh-divider span {
+    color: #8060c0;
+}
+
+[data-theme="arcane"] .sh-subtitle,
+.theme-arcane .sh-subtitle {
+    color: #9080c0;
+}
+
+[data-theme="arcane"] .sh-seal-circle,
+.theme-arcane .sh-seal-circle {
+    background: radial-gradient(circle, #4020a0 0%, #1a0840 100%);
+    border-color: #6040a0;
+}
+[data-theme="arcane"] .sh-seal-circle svg,
+.theme-arcane .sh-seal-circle svg { fill: #c090ff; }
+[data-theme="arcane"] .sh-seal-label,
+.theme-arcane .sh-seal-label { color: #6040a0; }
+
+[data-theme="arcane"] .sh-alignment,
+.theme-arcane .sh-alignment {
+    background: linear-gradient(135deg, #0e0820 0%, #1a1030 100%);
+    border-left-color: #8060c0;
+}
+[data-theme="arcane"] .sh-align-label,
+.theme-arcane .sh-align-label { color: #8060c0; }
+[data-theme="arcane"] .sh-align-value,
+.theme-arcane .sh-align-value { color: #e0d0ff; }
+[data-theme="arcane"] .sh-align-desc,
+.theme-arcane .sh-align-desc { color: #9080c0; }
+
+[data-theme="arcane"] .sh-stats,
+.theme-arcane .sh-stats {
+    background: #6040a0;
+    border-color: #6040a0;
+}
+[data-theme="arcane"] .sh-stat,
+.theme-arcane .sh-stat {
+    background: linear-gradient(160deg, #1e1438 0%, #150e28 100%);
+}
+[data-theme="arcane"] .sh-stat-val,
+.theme-arcane .sh-stat-val { color: #d0b8ff; }
+[data-theme="arcane"] .sh-stat-lbl,
+.theme-arcane .sh-stat-lbl { color: #6040a0; }
+
+[data-theme="arcane"] .sh-section-title,
+.theme-arcane .sh-section-title { color: #6040a0; }
+[data-theme="arcane"] .sh-section-hdr::after,
+.theme-arcane .sh-section-hdr::after { background: linear-gradient(to right, #4030a0, transparent); }
+
+[data-theme="arcane"] .sh-text,
+.theme-arcane .sh-text { color: #a090d0; }
+
+[data-theme="arcane"] .sh-equip-bullet,
+.theme-arcane .sh-equip-bullet { color: #6040a0; }
+[data-theme="arcane"] .sh-equip-name,
+.theme-arcane .sh-equip-name { color: #c0b0f0; }
+[data-theme="arcane"] .sh-equip-item,
+.theme-arcane .sh-equip-item { color: #9080c0; }
+
+[data-theme="arcane"] .sh-quote,
+.theme-arcane .sh-quote {
+    border-left-color: #6040a0;
+    background: rgba(96,64,160,0.08);
+    color: #c0b0f0;
+}
+
+[data-theme="arcane"] .sh-footer,
+.theme-arcane .sh-footer { border-top-color: #6040a0; }
+[data-theme="arcane"] .sh-footer-text,
+.theme-arcane .sh-footer-text { color: #6040a0; }
+[data-theme="arcane"] .sh-footer-seal,
+.theme-arcane .sh-footer-seal { background: #6040a0; }

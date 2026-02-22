@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор — Кузница Анкет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/sheet.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" id="theme-link" href="../assets/css/themes/medieval.css">
+    <style>
+
+        /* ══════════════════════════════════════════════════
+           КНОПКА «ПРИМЕНИТЬ» — главный акцент интерфейса
+        ══════════════════════════════════════════════════ */
+        .btn-apply {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 14px 20px;
+            font-family: var(--font-heading);
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s, color 0.25s, transform 0.18s, box-shadow 0.25s;
+
+            /* Неактивна — нет изменений */
+            background: #131008;
+            color: var(--text-dim);
+            border: 1px solid var(--panel-border);
+        }
+
+        /* Активна — есть изменения */
+        .btn-apply.has-changes {
+            background: linear-gradient(135deg,
+            var(--gold-dark) 0%,
+            var(--gold)      52%,
+            var(--gold-dark) 100%
+            );
+            color: var(--ink);
+            border-color: transparent;
+            animation: applyGlow 2.4s ease-in-out infinite;
+        }
+        @keyframes applyGlow {
+            0%,100% { box-shadow: 0 0 0 1px rgba(200,168,75,.25), 0 6px 24px rgba(139,90,20,.4); }
+            50%     { box-shadow: 0 0 0 3px rgba(200,168,75,.15), 0 10px 36px rgba(139,90,20,.6); }
+        }
+        .btn-apply.has-changes:hover {
+            transform: translateY(-2px);
+            animation: none;
+            box-shadow: 0 12px 40px rgba(139,90,20,.6);
+        }
+        .btn-apply.has-changes:active { transform: none; }
+
+        /* Блик поверх */
+        .btn-apply::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, transparent 55%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+        .btn-apply.has-changes::after { opacity: 1; }
+
+        /* Мигающий индикатор изменений */
+        .apply-dot {
+            display: none;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+            animation: dotBlink 1.1s ease-in-out infinite;
+        }
+        @keyframes dotBlink {
+            0%,100% { opacity: 1; }
+            50%     { opacity: .25; }
+        }
+
+        /* ══════════════════════════════════════════════════
+           СЕТКА КНОПОК ЭКСПОРТА (2×2)
+        ══════════════════════════════════════════════════ */
+        .export-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        /* Базовый стиль кнопки экспорта */
+        .xbtn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 12px 8px;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 0.52rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .xbtn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background 0.2s;
+        }
+        .xbtn:hover::before { background: rgba(255,255,255,.04); }
+
+        .xbtn-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        /* ── HTML — золотой ── */
+        .xbtn--html {
+            background: linear-gradient(160deg, #201e14 0%, #141208 100%);
+            color: var(--gold-dark);
+            border: 1px solid #2a2410;
+        }
+        .xbtn--html:hover {
+            background: linear-gradient(160deg, #2c2818 0%, #1a1610 100%);
+            color: var(--gold-light);
+            border-color: var(--gold-dark);
+            box-shadow: 0 4px 20px rgba(139,90,20,.3), inset 0 1px 0 rgba(200,168,75,.08);
+        }
+        .xbtn--html:hover .xbtn-icon { transform: translateY(3px); }
+
+        /* ── Печать — бордовый ── */
+        .xbtn--print {
+            background: linear-gradient(160deg, #1c1010 0%, #100808 100%);
+            color: #7a4040;
+            border: 1px solid #281414;
+        }
+        .xbtn--print:hover {
+            background: linear-gradient(160deg, #261616 0%, #180e0e 100%);
+            color: #c07878;
+            border-color: #6a2a2a;
+            box-shadow: 0 4px 20px rgba(100,30,30,.3), inset 0 1px 0 rgba(200,80,80,.06);
+        }
+
+        /* ── Сохранить — синий ── */
+        .xbtn--save {
+            background: linear-gradient(160deg, #101820 0%, #08101a 100%);
+            color: #406080;
+            border: 1px solid #182030;
+        }
+        .xbtn--save:hover {
+            background: linear-gradient(160deg, #162030 0%, #0e1828 100%);
+            color: #78b0d0;
+            border-color: #2a5070;
+            box-shadow: 0 4px 20px rgba(30,70,110,.3), inset 0 1px 0 rgba(60,120,180,.06);
+        }
+        .xbtn--save:hover .xbtn-icon { transform: translateY(-3px); }
+
+        /* ── Загрузить — зелёный ── */
+        .xbtn--load {
+            background: linear-gradient(160deg, #101810 0%, #080e08 100%);
+            color: #407040;
+            border: 1px solid #182018;
+            cursor: pointer;
+        }
+        .xbtn--load:hover {
+            background: linear-gradient(160deg, #162016 0%, #0e180e 100%);
+            color: #78c078;
+            border-color: #2a602a;
+            box-shadow: 0 4px 20px rgba(30,90,30,.3), inset 0 1px 0 rgba(60,160,60,.06);
+        }
+        .xbtn--load:hover .xbtn-icon { transform: translateY(3px); }
+
+        /* ══ Кнопка сброса ══ */
+        .btn-danger-soft {
+            width: 100%;
+            padding: 8px;
+            background: transparent;
+            border: 1px solid #1e1208;
+            color: #3a2818;
+            font-family: var(--font-heading);
+            font-size: 0.5rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-danger-soft:hover {
+            border-color: var(--danger);
+            color: #c05050;
+            background: rgba(120,20,20,.07);
+        }
+
+        /* ══ Иконка-кнопка в шапке сайдбара ══ */
+        .sb-icon-btn {
+            width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            background: transparent;
+            border: 1px solid var(--panel-border);
+            color: var(--text-dim);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: var(--font-heading);
+        }
+        .sb-icon-btn:hover { border-color: var(--gold-dark); color: var(--gold); }
+
+        /* ══ Подсказка над превью ══ */
+        .preview-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.5rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            opacity: .4;
+            margin-bottom: 22px;
+            transition: color .3s, opacity .3s;
+        }
+        .preview-hint.dirty {
+            color: var(--gold-dark);
+            opacity: 1;
+            animation: hintBreath 2.2s ease-in-out infinite;
+        }
+        @keyframes hintBreath {
+            0%,100% { opacity: .75; }
+            50%     { opacity: .45; }
+        }
+        .preview-hint-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ══ Тосты ══ */
+        .toast {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            background: #111008;
+            border: 1px solid var(--panel-border);
+            border-left: 3px solid var(--gold-dark);
+            padding: 11px 18px;
+            font-family: var(--font-heading);
+            font-size: 0.58rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--text-bright);
+            z-index: 999;
+            min-width: 190px;
+            animation: toastIn .22s ease;
+            transition: opacity .25s, transform .25s;
+        }
+        .toast--success { border-left-color: #4a8a30; color: #80c060; }
+        .toast--error   { border-left-color: var(--danger); color: #c05050; }
+        @keyframes toastIn {
+            from { opacity:0; transform:translateX(12px); }
+            to   { opacity:1; transform:none; }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+<nav class="nav">
+    <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">⚔</span> Кузница Анкет
+    </a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Главная</a></li>
+        <li><a href="generator.html" class="active">Генератор</a></li>
+        <li><a href="themes.html">Темы</a></li>
+        <li><a href="about.html">О проекте</a></li>
+    </ul>
+</nav>
+
+<!-- ═══════════ ЛЕЙАУТ ═══════════ -->
+<div class="generator-layout">
+
+    <!-- ─────────── САЙДБАР ─────────── -->
+    <aside class="sidebar">
+
+        <!-- Шапка сайдбара -->
+        <div class="sidebar-header">
+            <div class="sidebar-title">⚔ Редактор</div>
+        </div>
+
+        <!-- Прокручиваемое тело -->
+        <div class="sidebar-body">
+
+            <!-- ТЕМА -->
+            <div class="section-divider">Тема оформления</div>
+            <div id="theme-picker" class="theme-picker"></div>
+
+            <!-- ЛИЧНОСТЬ -->
+            <div class="section-divider">Личность</div>
+
+            <div class="form-group">
+                <label class="form-label">Имя персонажа</label>
+                <input class="sb-input" type="text" id="f-name" placeholder="Имя...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Класс · Роль · Прозвище</label>
+                <input class="sb-input" type="text" id="f-class" placeholder="Паладин · Страж...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Фракция / Орден</label>
+                <input class="sb-input" type="text" id="f-order" placeholder="Орден Перчатки...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Девиз / Цитата</label>
+                <input class="sb-input" type="text" id="f-quote" placeholder="Девиз персонажа...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Мировоззрение</label>
+                <input class="sb-input" type="text" id="f-alignment" placeholder="Законопослушное доброе...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Подпись к мировоззрению</label>
+                <input class="sb-input" type="text" id="f-align-desc" placeholder="Личный кодекс...">
+            </div>
+
+            <!-- ХАРАКТЕРИСТИКИ -->
+            <div class="section-divider">Характеристики</div>
+            <div id="stats-list" class="stats-list"></div>
+            <button class="btn-add" id="btn-add-stat">+ Добавить характеристику</button>
+
+            <!-- ОПИСАНИЕ -->
+            <div class="section-divider">Описание</div>
+
+            <div class="form-group">
+                <label class="form-label">Характер</label>
+                <textarea class="sb-textarea" id="f-personality" rows="3" placeholder="Черты характера..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Физические качества</label>
+                <textarea class="sb-textarea" id="f-physical" rows="3" placeholder="Телосложение, выносливость..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Навыки и таланты</label>
+                <textarea class="sb-textarea" id="f-skills" rows="3" placeholder="Особые умения..."></textarea>
+            </div>
+
+            <!-- СНАРЯЖЕНИЕ -->
+            <div class="section-divider">Снаряжение</div>
+            <div id="equip-list" class="equip-list"></div>
+            <button class="btn-add" id="btn-add-equip">+ Добавить предмет</button>
+
+            <!-- ФИНАЛ -->
+            <div class="section-divider">Финал</div>
+
+            <div class="form-group">
+                <label class="form-label">Итоговая фраза</label>
+                <textarea class="sb-textarea" id="f-final-quote" rows="2" placeholder="Цитата о персонаже..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Текст подвала</label>
+                <input class="sb-input" type="text" id="f-footer" placeholder="Орден · Город · Статус">
+            </div>
+
+        </div><!-- /sidebar-body -->
+
+        <!-- ────────── ПОДВАЛ САЙДБАРА ────────── -->
+        <div class="sidebar-footer">
+
+            <!-- ★ ГЛАВНАЯ КНОПКА ★ -->
+            <button class="btn-apply" id="btn-apply">
+                <span class="apply-dot"></span>
+                <span class="apply-text">Анкета обновлена ✓</span>
+            </button>
+
+            <!-- Сетка кнопок экспорта -->
+            <div class="export-grid">
+
+                <button class="xbtn xbtn--html" id="btn-export-html">
+                    <span class="xbtn-icon">⬇</span>
+                    <span>Скачать HTML</span>
+                </button>
+
+                <button class="xbtn xbtn--print" id="btn-print">
+                    <span class="xbtn-icon">🖨</span>
+                    <span>Печать / PDF</span>
+                </button>
+
+                <button class="xbtn xbtn--save" id="btn-save-json">
+                    <span class="xbtn-icon">↑</span>
+                    <span>Сохранить JSON</span>
+                </button>
+
+                <label class="xbtn xbtn--load">
+                    <span class="xbtn-icon">↓</span>
+                    <span>Загрузить JSON</span>
+                    <input type="file" id="btn-load-file" accept=".json" style="display:none">
+                </label>
+
+            </div>
+
+            <!-- Сброс -->
+            <button class="btn-danger-soft" id="btn-reset">
+                ↺ Сбросить к дефолту
+            </button>
+
+        </div><!-- /sidebar-footer -->
+
+    </aside>
+
+    <!-- ─────────── ПРЕВЬЮ ─────────── -->
+    <main class="preview-area">
+        <div class="preview-hint" id="preview-hint">
+            <span class="preview-hint-dot"></span>
+            <span id="preview-hint-text">предпросмотр</span>
+        </div>
+        <div id="sheet-container"></div>
+    </main>
+
+</div><!-- /generator-layout -->
+
+<!-- JS — строго в этом порядке -->
+<script src="../assets/js/state.js"></script>
+<script src="../assets/js/builder.js"></script>
+<script src="../assets/js/storage.js"></script>
+<script src="../assets/js/themes.js"></script>
+<script src="../assets/js/sidebar.js"></script>
+<script src="../assets/js/export.js"></script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>

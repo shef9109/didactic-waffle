@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════════
+   ТЕМА: NORDIC — Северная / Руны
+   Выветренный пергамент, тёмно-янтарное золото, суровый север.
+═══════════════════════════════════════════════════════════════ */
+
+[data-theme="nordic"] .sheet,
+.theme-nordic .sheet {
+    background: linear-gradient(160deg,
+    #ede0ca 0%,
+    #d8c8a4 35%,
+    #e2d0a8 65%,
+    #c8b07a 100%
+    );
+    box-shadow:
+            0 0 0 1px #5a4010,
+            0 0 0 5px #0a0804,
+            0 0 0 7px #5a4010,
+            0 0 0 8px #060504,
+            0 0 80px rgba(0,0,0,0.95),
+            inset 0 0 100px rgba(90,60,10,0.08);
+}
+
+[data-theme="nordic"] .sh-header,
+.theme-nordic .sh-header { border-bottom-color: #5a4010; }
+
+[data-theme="nordic"] .sh-order-tag,
+.theme-nordic .sh-order-tag { color: #5a4010; }
+
+[data-theme="nordic"] .sh-name,
+.theme-nordic .sh-name {
+    color: #1a1008;
+    text-shadow: 2px 3px 0 rgba(90,60,10,0.2);
+    font-size: 2.7rem;
+    letter-spacing: 0.08em;
+}
+
+[data-theme="nordic"] .sh-divider::before,
+[data-theme="nordic"] .sh-divider::after,
+.theme-nordic .sh-divider::before,
+.theme-nordic .sh-divider::after {
+    background: linear-gradient(to right, transparent, #5a4010, transparent);
+}
+[data-theme="nordic"] .sh-divider span,
+.theme-nordic .sh-divider span { color: #5a1a10; }
+
+[data-theme="nordic"] .sh-subtitle,
+.theme-nordic .sh-subtitle { color: #3a2808; }
+
+[data-theme="nordic"] .sh-seal-circle,
+.theme-nordic .sh-seal-circle {
+    background: radial-gradient(circle, #3a2808 0%, #1a1004 100%);
+    border-color: #5a4010;
+}
+[data-theme="nordic"] .sh-seal-circle svg,
+.theme-nordic .sh-seal-circle svg { fill: #c89840; }
+[data-theme="nordic"] .sh-seal-label,
+.theme-nordic .sh-seal-label { color: #5a4010; }
+
+[data-theme="nordic"] .sh-alignment,
+.theme-nordic .sh-alignment {
+    background: linear-gradient(135deg, #1a1008 0%, #2a1c0a 100%);
+    border-left-color: #8a6828;
+}
+[data-theme="nordic"] .sh-align-label,
+.theme-nordic .sh-align-label { color: #8a6828; }
+
+[data-theme="nordic"] .sh-stats,
+.theme-nordic .sh-stats { background: #5a4010; border-color: #5a4010; }
+[data-theme="nordic"] .sh-stat,
+.theme-nordic .sh-stat {
+    background: linear-gradient(160deg, #e8d098 0%, #d0b868 100%);
+}
+[data-theme="nordic"] .sh-stat-val,
+.theme-nordic .sh-stat-val { color: #1a1008; font-size: 1.4rem; }
+[data-theme="nordic"] .sh-stat-lbl,
+.theme-nordic .sh-stat-lbl { color: #5a4010; }
+
+[data-theme="nordic"] .sh-section-title,
+.theme-nordic .sh-section-title { color: #5a1a10; }
+[data-theme="nordic"] .sh-section-hdr::after,
+.theme-nordic .sh-section-hdr::after { background: linear-gradient(to right, #5a4010, transparent); }
+
+[data-theme="nordic"] .sh-text,
+.theme-nordic .sh-text { color: #2a1c08; }
+[data-theme="nordic"] .sh-equip-bullet,
+.theme-nordic .sh-equip-bullet { color: #5a4010; }
+[data-theme="nordic"] .sh-equip-name,
+.theme-nordic .sh-equip-name { color: #1a1008; }
+[data-theme="nordic"] .sh-equip-item,
+.theme-nordic .sh-equip-item { color: #2a1c08; }
+
+[data-theme="nordic"] .sh-quote,
+.theme-nordic .sh-quote {
+    border-left-color: #5a4010;
+    background: rgba(90,60,10,0.07);
+    color: #1a1008;
+}
+
+[data-theme="nordic"] .sh-footer,
+.theme-nordic .sh-footer { border-top-color: #5a4010; }
+[data-theme="nordic"] .sh-footer-text,
+.theme-nordic .sh-footer-text { color: #5a4010; }
+[data-theme="nordic"] .sh-footer-seal,
+.theme-nordic .sh-footer-seal { background: #5a4010; }
