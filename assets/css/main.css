@@ -380,3 +380,75 @@ a:hover { color: var(--gold-light); }
 
 .w-full  { width: 100%; }
 .hidden  { display: none !important; }
+/* ── ГЛОБАЛЬНЫЕ ТЕМЫ САЙТА ── */
+body[data-site-theme="medieval"] {
+    --gold: #c8a84b;
+    --gold-light: #e8c96b;
+    --gold-dark: #8a6e28;
+    --gold-dim: #5a4a1a;
+    --blood: #7a1c1c;
+    --panel: #16110a;
+    --panel-light: #1e1810;
+    --panel-border: #2a2010;
+    --input-bg: #1e1710;
+    --input-border: #3a2c18;
+    --text-dim: #7a6a4a;
+    --text-main: #c8b07a;
+    --text-bright: #e8d09a;
+    --bg: #0d0a05;
+    --bg-deep: #080602;
+}
+
+body[data-site-theme="arcane"] {
+    --gold: #b896ff;
+    --gold-light: #d8c6ff;
+    --gold-dark: #6040a0;
+    --gold-dim: #3a2870;
+    --blood: #8a3bd8;
+    --panel: #130d20;
+    --panel-light: #1b1230;
+    --panel-border: #2e1f50;
+    --input-bg: #1a1230;
+    --input-border: #3b2c60;
+    --text-dim: #8f7ab6;
+    --text-main: #b9a8de;
+    --text-bright: #e6dcff;
+    --bg: #0b0714;
+    --bg-deep: #05030a;
+}
+
+body[data-site-theme="nordic"] {
+    --gold: #a07b3c;
+    --gold-light: #c79d57;
+    --gold-dark: #6f5322;
+    --gold-dim: #4a3716;
+    --blood: #7b2b1f;
+    --panel: #19130a;
+    --panel-light: #251c10;
+    --panel-border: #3a2b16;
+    --input-bg: #22190d;
+    --input-border: #4a361c;
+    --text-dim: #8d7650;
+    --text-main: #d3ba8b;
+    --text-bright: #f0dcb5;
+    --bg: #0e0904;
+    --bg-deep: #070401;
+}
+
+body[data-site-theme="oriental"] {
+    --gold: #c56a2c;
+    --gold-light: #e1955a;
+    --gold-dark: #8f3f12;
+    --gold-dim: #612b0b;
+    --blood: #9e1f12;
+    --panel: #1a0f08;
+    --panel-light: #26160d;
+    --panel-border: #3f2315;
+    --input-bg: #26170f;
+    --input-border: #5a331f;
+    --text-dim: #9b6f52;
+    --text-main: #d6a786;
+    --text-bright: #f2ceb4;
+    --bg: #100703;
+    --bg-deep: #090301;
+}

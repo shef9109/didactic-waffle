@@ -204,20 +204,8 @@
 
 </div>
 
-<script>
-    let selectedTheme = 'medieval';
+<script src="../assets/js/site-theme.js"></script>
 
-    function selectTheme(id) {
-        selectedTheme = id;
-        document.querySelectorAll('.theme-card').forEach(card => {
-            const isActive = card.dataset.theme === id;
-            card.classList.toggle('active', isActive);
-            card.querySelector('.theme-card-badge').textContent = isActive ? 'Активна' : 'Выбрать';
-        });
-        const link = document.getElementById('go-generator');
-        link.href = `generator.html?theme=${id}`;
-    }
-</script>
 
 </body>
 </html>

@@ -5,21 +5,31 @@
 
 const Sidebar = (() => {
 
+    let _isBound = false;
+
     /* ── Хелперы ── */
     function el(id) { return document.getElementById(id); }
 
     function bindInput(id, stateKey) {
         const input = el(id);
         if (!input) return;
-        input.value = State.getChar(stateKey);
+
+        if (document.activeElement !== input) input.value = State.getChar(stateKey);
+
+        if (input.dataset.bound === '1') return;
         input.addEventListener('input', () => State.setChar(stateKey, input.value));
+        input.dataset.bound = '1';
     }
 
     function bindMeta(id, metaKey) {
         const input = el(id);
         if (!input) return;
-        input.value = State.getMeta(metaKey);
+
+        if (document.activeElement !== input) input.value = State.getMeta(metaKey);
+
+        if (input.dataset.bound === '1') return;
         input.addEventListener('input', () => State.setMeta(metaKey, input.value));
+        input.dataset.bound = '1';
     }
 
     /* ══════════════════════════════════════════════
@@ -47,6 +57,7 @@ const Sidebar = (() => {
             });
             row.querySelector('.btn-remove').addEventListener('click', () => {
                 State.removeStat(i);
+                renderStats();
             });
 
             list.appendChild(row);
@@ -80,6 +91,7 @@ const Sidebar = (() => {
             });
             card.querySelector('.btn-remove').addEventListener('click', () => {
                 State.removeEquip(i);
+                renderEquips();
             });
 
             list.appendChild(card);
@@ -145,18 +157,26 @@ const Sidebar = (() => {
         renderEquips();
         renderThemePicker();
 
-        /* Кнопки добавления */
+        /* Кнопки добавления — биндим один раз */
+        if (_isBound) return;
+
         const addStatBtn = el('btn-add-stat');
-        if (addStatBtn) addStatBtn.addEventListener('click', () => State.addStat());
+        if (addStatBtn) {
+            addStatBtn.addEventListener('click', () => {
+                State.addStat();
+                renderStats();
+            });
+        }
 
         const addEquipBtn = el('btn-add-equip');
-        if (addEquipBtn) addEquipBtn.addEventListener('click', () => State.addEquip());
+        if (addEquipBtn) {
+            addEquipBtn.addEventListener('click', () => {
+                State.addEquip();
+                renderEquips();
+            });
+        }
 
-        /* Перерисовывать динамические списки при изменении state */
-        State.subscribe(() => {
-            renderStats();
-            renderEquips();
-        });
+        _isBound = true;
     }
 
     return { init, renderStats, renderEquips, renderThemePicker };
