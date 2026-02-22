@@ -203,6 +203,49 @@
 }
 
 
+.btn-add {
+    width: 100%;
+    padding: 8px 10px;
+    background: linear-gradient(160deg, #1a140a 0%, #0f0b05 100%);
+    border: 1px solid var(--panel-border);
+    color: var(--gold-dark);
+    font-family: var(--font-heading);
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--tr);
+}
+.btn-add:hover {
+    border-color: var(--gold-dark);
+    color: var(--gold-light);
+    background: linear-gradient(160deg, #241b0d 0%, #151007 100%);
+    box-shadow: 0 4px 16px rgba(139,90,20,.25);
+}
+
+.btn-remove {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #3a2315;
+    background: linear-gradient(160deg, #1a1010 0%, #100808 100%);
+    color: #a86858;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--tr);
+}
+.btn-remove:hover {
+    border-color: var(--danger);
+    color: #e08a7a;
+    background: linear-gradient(160deg, #241414 0%, #160d0d 100%);
+    box-shadow: 0 2px 10px rgba(120,20,20,.25);
+}
+
+
 /* ══════════════════════════════════════════════
    ОБЛАСТЬ ПРЕДПРОСМОТРА
 ══════════════════════════════════════════════ */
