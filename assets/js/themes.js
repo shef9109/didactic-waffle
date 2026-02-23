@@ -4,7 +4,7 @@
 
 const Themes = (() => {
 
-    const ASSET_VER = '20260223-1';
+    const ASSET_VER = '20260223-2';
 
     const THEME_CSS = {
         medieval: `../assets/css/themes/medieval.css?v=${ASSET_VER}`,

@@ -3,6 +3,7 @@
 */
 
 const Export = (() => {
+    let html2canvasPromise = null;
 
     function collectStyles() {
         let css = '';
@@ -31,8 +32,11 @@ const Export = (() => {
         const url = URL.createObjectURL(blob);
         a.href = url;
         a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
         a.click();
-        URL.revokeObjectURL(url);
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
     }
 
     function downloadHTML() {
@@ -60,7 +64,7 @@ ${container.innerHTML}
         if (!document.fonts?.ready) return;
         await Promise.race([
             document.fonts.ready,
-            new Promise(resolve => setTimeout(resolve, 2500)),
+            new Promise((resolve) => setTimeout(resolve, 2500)),
         ]);
     }
 
@@ -78,6 +82,49 @@ ${container.innerHTML}
                 img.addEventListener('error', resolve, { once: true });
             });
         }));
+    }
+
+    function loadExternalScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error(`Failed to load ${src}`));
+            document.head.appendChild(script);
+        });
+    }
+
+    async function ensureHtml2Canvas() {
+        if (window.html2canvas) return window.html2canvas;
+        if (html2canvasPromise) return html2canvasPromise;
+
+        const cdnUrls = [
+            'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
+            'https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js',
+        ];
+
+        html2canvasPromise = (async () => {
+            for (const src of cdnUrls) {
+                try {
+                    await loadExternalScript(src);
+                    if (window.html2canvas) return window.html2canvas;
+                } catch (_) {
+                    // try next CDN
+                }
+            }
+            throw new Error('html2canvas is unavailable');
+        })();
+
+        return html2canvasPromise;
+    }
+
+    function getRenderSize(node) {
+        const rect = node.getBoundingClientRect();
+        const width = Math.max(1, Math.ceil(rect.width || node.offsetWidth || node.clientWidth));
+        const height = Math.max(1, Math.ceil(rect.height || node.offsetHeight || node.clientHeight));
+        const scale = Math.max(2, Math.min(3, window.devicePixelRatio || 2));
+        return { width, height, scale };
     }
 
     function copyComputedStyle(source, target) {
@@ -194,29 +241,25 @@ ${container.innerHTML}
         });
     }
 
-    function canvasToBlob(canvas, mime, quality) {
-        return new Promise((resolve, reject) => {
-            canvas.toBlob((blob) => {
-                if (!blob) {
-                    reject(new Error('Canvas conversion failed'));
-                    return;
-                }
-                resolve(blob);
-            }, mime, quality);
+    async function renderWithHtml2Canvas(node, format) {
+        const html2canvas = await ensureHtml2Canvas();
+        const { scale } = getRenderSize(node);
+        const bg = format === 'png' ? null : '#ffffff';
+        const canvas = await html2canvas(node, {
+            backgroundColor: bg,
+            scale,
+            useCORS: true,
+            allowTaint: false,
+            imageTimeout: 7000,
+            logging: false,
+            removeContainer: true,
         });
+        if (!canvas) throw new Error('html2canvas returned empty canvas');
+        return canvas;
     }
 
-    async function exportImage(format = 'png') {
-        const node = document.querySelector('#sheet-container .sheet');
-        if (!node) throw new Error('Sheet node not found');
-
-        await waitForFonts();
-        await waitForImages(node);
-
-        const rect = node.getBoundingClientRect();
-        const width = Math.max(1, Math.ceil(rect.width));
-        const height = Math.max(1, Math.ceil(rect.height));
-        const scale = Math.max(2, Math.min(3, window.devicePixelRatio || 2));
+    async function renderWithForeignObject(node, format) {
+        const { width, height, scale } = getRenderSize(node);
 
         const clone = await cloneWithInlineStyles(node);
         if (clone instanceof Element) {
@@ -228,7 +271,6 @@ ${container.innerHTML}
 
         const markup = xmlWrap(clone, width, height);
         const svg = svgFromMarkup(markup, width, height);
-
         const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
         const svgUrl = URL.createObjectURL(svgBlob);
 
@@ -252,20 +294,69 @@ ${container.innerHTML}
             ctx.fillRect(0, 0, width, height);
         }
         ctx.drawImage(img, 0, 0, width, height);
+        return canvas;
+    }
 
-        const mime = format === 'jpg'
-            ? 'image/jpeg'
-            : format === 'webp'
-                ? 'image/webp'
-                : 'image/png';
+    function normalizeFormat(format) {
+        const f = String(format || 'png').toLowerCase();
+        if (f === 'jpeg') return 'jpg';
+        if (f === 'jpg' || f === 'png' || f === 'webp') return f;
+        return 'png';
+    }
 
-        const quality = format === 'png' ? undefined : 0.95;
+    function formatToMime(format) {
+        if (format === 'jpg') return 'image/jpeg';
+        if (format === 'webp') return 'image/webp';
+        return 'image/png';
+    }
+
+    function canvasToBlob(canvas, mime, quality) {
+        return new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    reject(new Error('Canvas conversion failed'));
+                    return;
+                }
+                resolve(blob);
+            }, mime, quality);
+        });
+    }
+
+    async function exportImage(format = 'png') {
+        const node = document.querySelector('#sheet-container .sheet');
+        if (!node) throw new Error('Sheet node not found');
+
+        const normalized = normalizeFormat(format);
+        await waitForFonts();
+        await waitForImages(node);
+
+        let canvas;
+        let primaryError = null;
+
+        try {
+            canvas = await renderWithHtml2Canvas(node, normalized);
+        } catch (err) {
+            primaryError = err;
+            try {
+                canvas = await renderWithForeignObject(node, normalized);
+            } catch (fallbackErr) {
+                const p = primaryError?.message || 'unknown';
+                const f = fallbackErr?.message || 'unknown';
+                throw new Error(`Export failed. Primary: ${p}. Fallback: ${f}`);
+            }
+        }
+
+        const mime = formatToMime(normalized);
+        const quality = normalized === 'png' ? undefined : 0.95;
         const blob = await canvasToBlob(canvas, mime, quality);
-        downloadBlob(blob, `${fileBaseName()}_sheet.${format}`);
+        downloadBlob(blob, `${fileBaseName()}_sheet.${normalized}`);
+
+        if (primaryError) {
+            console.warn('Primary export renderer failed, fallback was used:', primaryError);
+        }
     }
 
     return { downloadHTML, exportImage };
-
 })();
 
 window.Export = Export;
