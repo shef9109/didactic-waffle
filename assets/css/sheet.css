@@ -403,6 +403,20 @@
     border-color: rgba(168, 143, 230, 0.5);
     box-shadow: inset 0 1px 0 rgba(238, 226, 255, 0.18);
 }
+.sheet[data-theme="arcane"] .sh-brief-head {
+    background: rgba(30, 20, 50, 0.72);
+    border-color: rgba(138, 99, 212, 0.55);
+}
+.sheet[data-theme="arcane"] .sh-brief-item {
+    background: linear-gradient(90deg, rgba(45, 30, 74, 0.88), rgba(31, 20, 54, 0.9));
+    border-color: rgba(138, 99, 212, 0.55);
+}
+.sheet[data-theme="arcane"] .sh-brief-item span {
+    color: #d7c3ff;
+}
+.sheet[data-theme="arcane"] .sh-brief-item b {
+    color: #f4edff;
+}
 .sheet[data-theme="nordic"] {
     background: linear-gradient(160deg, #efe4cf 0%, #decba8 46%, #e7d5b3 100%);
     --gold-dark: #7a5f2e;
