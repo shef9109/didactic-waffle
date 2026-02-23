@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта Побережья Мечей — Кузница Анкет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="../assets/css/sword-coast-map.css">
+</head>
+<body class="sword-coast-page">
+
+<nav class="nav">
+    <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">⚔</span> Кузница Анкет
+    </a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Главная</a></li>
+        <li><a href="generator.html">Генератор</a></li>
+        <li><a href="sword-coast-map.html" class="active">Карта</a></li>
+        <li><a href="themes.html">Темы</a></li>
+        <li><a href="about.html">О проекте</a></li>
+    </ul>
+</nav>
+
+<main class="map-page">
+    <header class="map-hero">
+        <h1>Побережье Мечей</h1>
+        <div class="ornament-divider" style="max-width:480px;margin:14px auto 16px">
+            <span>Интерактивная карта для D&D</span>
+        </div>
+        <p>
+            Масштабируй, двигай карту и быстро находи локации через поиск.
+            Введи название города, дороги, региона или водоёма — карта автоматически сфокусируется на нужной точке.
+        </p>
+    </header>
+
+    <section class="map-shell">
+        <aside class="map-panel">
+            <div class="map-panel-block">
+                <div class="map-panel-title">Поиск локации</div>
+                <div class="map-search-row">
+                    <input id="location-search" class="form-input" type="text" placeholder="Например: Невервинтер" autocomplete="off">
+                    <button id="clear-location-search" class="map-clear-btn" type="button" aria-label="Очистить поиск">✕</button>
+                </div>
+                <div id="search-feedback" class="map-search-feedback">Точек на карте: 0</div>
+                <ul id="search-results" class="map-results"></ul>
+            </div>
+
+            <div class="map-panel-block">
+                <div class="map-panel-title">Быстрый переход</div>
+                <div id="quick-locations" class="map-quick-list"></div>
+            </div>
+
+            <div class="map-panel-block">
+                <div class="map-panel-title">Текущая точка</div>
+                <div class="map-selected">
+                    <span id="selected-location-name" class="map-selected-name">Точка не выбрана</span>
+                    <span id="selected-location-meta" class="map-selected-meta">Выберите локацию на карте</span>
+                </div>
+            </div>
+
+            <div class="map-panel-block">
+                <div class="map-panel-title">Категории</div>
+                <div id="category-legend" class="map-legend"></div>
+            </div>
+        </aside>
+
+        <div class="map-canvas-wrap">
+            <button id="fit-map" class="map-fit-btn" type="button">Показать весь регион</button>
+            <div id="sword-coast-map" aria-label="Интерактивная карта Побережья Мечей"></div>
+        </div>
+    </section>
+
+    <p class="map-attribution">
+        Источник координат и базовой карты: Adventure Guys (адаптировано под интерфейс сайта).
+    </p>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="../assets/js/sword-coast-data.js"></script>
+<script src="../assets/js/sword-coast-map.js"></script>
+<script src="../assets/js/site-theme.js"></script>
+
+</body>
+</html>
