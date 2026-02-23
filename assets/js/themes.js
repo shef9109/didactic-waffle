@@ -4,11 +4,13 @@
 
 const Themes = (() => {
 
+    const ASSET_VER = '20260223-1';
+
     const THEME_CSS = {
-        medieval: '../assets/css/themes/medieval.css',
-        arcane:   '../assets/css/themes/arcane.css',
-        nordic:   '../assets/css/themes/nordic.css',
-        oriental: '../assets/css/themes/oriental.css',
+        medieval: `../assets/css/themes/medieval.css?v=${ASSET_VER}`,
+        arcane:   `../assets/css/themes/arcane.css?v=${ASSET_VER}`,
+        nordic:   `../assets/css/themes/nordic.css?v=${ASSET_VER}`,
+        oriental: `../assets/css/themes/oriental.css?v=${ASSET_VER}`,
     };
 
     /* Применить тему — меняем <link id="theme-link"> */

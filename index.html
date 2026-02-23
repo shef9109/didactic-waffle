@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кузница Анкет</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=20260223-1">
     <style>
 
         /* ══════════════════════════════════════════
@@ -109,7 +109,6 @@
                     radial-gradient(ellipse 60% 50% at 15% 50%, var(--home-mid-glow) 0%, transparent 55%),
                     radial-gradient(ellipse 50% 60% at 85% 80%, var(--home-low-glow) 0%, transparent 50%),
                     #07040100;
-            background-color: #07040100;
         }
 
         /* Геометрический SVG орнамент */
@@ -138,6 +137,8 @@
             overflow: hidden;
         }
         .spark {
+            --dur: 4s;
+            --delay: 0s;
             position: absolute;
             width: 2px; height: 2px;
             border-radius: 50%;
@@ -171,7 +172,7 @@
         }
 
         .hero-eyebrow {
-            font-family: var(--font-heading);
+            font-family: var(--font-heading, serif);
             font-size: 0.58rem;
             letter-spacing: 0.55em;
             text-transform: uppercase;
@@ -192,7 +193,7 @@
         .hero-eyebrow::after { transform: scaleX(-1); }
 
         .hero-title {
-            font-family: var(--font-display);
+            font-family: var(--font-display, serif);
             font-size: clamp(3.2rem, 8vw, 6.5rem);
             font-weight: 900;
             color: transparent;
@@ -227,7 +228,7 @@
             background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
         }
         .hero-sub-line span {
-            font-family: var(--font-heading);
+            font-family: var(--font-heading, serif);
             font-size: 0.6rem;
             letter-spacing: 0.42em;
             color: var(--blood);
@@ -236,7 +237,7 @@
         }
 
         .hero-desc {
-            font-family: var(--font-body);
+            font-family: var(--font-body, serif);
             font-style: italic;
             font-size: 1.15rem;
             color: var(--text-dim);
@@ -262,7 +263,7 @@
             bottom: 32px;
             left: 50%;
             transform: translateX(-50%);
-            font-family: var(--font-heading);
+            font-family: var(--font-heading, serif);
             font-size: 0.52rem;
             letter-spacing: 0.3em;
             color: var(--gold-dark);
@@ -403,7 +404,7 @@
         .type-head-text { flex: 1; }
 
         .type-title {
-            font-family: var(--type-font-head);
+            font-family: var(--type-font-head, serif);
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.2em;
@@ -412,7 +413,7 @@
             line-height: 1.2;
         }
         .type-role {
-            font-family: var(--type-font-head);
+            font-family: var(--type-font-head, serif);
             font-size: 0.5rem;
             letter-spacing: 0.28em;
             text-transform: uppercase;
@@ -433,7 +434,7 @@
         }
 
         .type-desc {
-            font-family: var(--type-font-body);
+            font-family: var(--type-font-body, serif);
             font-size: 0.88rem;
             line-height: 1.72;
             color: var(--ink-light);
@@ -452,7 +453,7 @@
             gap: 5px;
         }
         .type-tag {
-            font-family: var(--type-font-head);
+            font-family: var(--type-font-head, serif);
             font-size: 0.46rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -476,7 +477,7 @@
         }
 
         .type-foot-label {
-            font-family: var(--type-font-head);
+            font-family: var(--type-font-head, serif);
             font-size: 0.47rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
@@ -534,14 +535,14 @@
             background: rgba(0,0,0,0.2);
         }
         .site-footer p {
-            font-family: var(--font-heading);
+            font-family: var(--font-heading, serif);
             font-size: 0.54rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--text-dim);
         }
 
-        /* Адаптив */
+        /* Адаптация */
         @media (max-width: 960px) {
             .types-grid { grid-template-columns: repeat(2,1fr); }
             .types-section { padding: 20px 24px 70px; }
@@ -803,7 +804,7 @@
     })();
 </script>
 
-<script src="assets/js/site-theme.js"></script>
+<script src="assets/js/site-theme.js?v=20260223-1"></script>
 
 </body>
 </html>
