@@ -54,12 +54,12 @@
 }
 
 [data-theme="arcane"] .sh-seal-circle,
-.theme-arcane .sh-seal-circle {
-    background: radial-gradient(circle, #4020a0 0%, #1a0840 100%);
-    border-color: #6040a0;
+.theme-arcane .sh-seal-circle,
+[data-theme="arcane"] .sh-footer-seal,
+.theme-arcane .sh-footer-seal {
+    --seal-rim: #8e72cb;
+    --seal-ink: #efe6ff;
 }
-[data-theme="arcane"] .sh-seal-circle svg,
-.theme-arcane .sh-seal-circle svg { fill: #c090ff; }
 [data-theme="arcane"] .sh-seal-label,
 .theme-arcane .sh-seal-label { color: #6040a0; }
 
@@ -116,4 +116,4 @@
 [data-theme="arcane"] .sh-footer-text,
 .theme-arcane .sh-footer-text { color: #6040a0; }
 [data-theme="arcane"] .sh-footer-seal,
-.theme-arcane .sh-footer-seal { background: #6040a0; }
+.theme-arcane .sh-footer-seal { border-color: #8e72cb; }

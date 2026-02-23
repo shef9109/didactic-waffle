@@ -47,12 +47,12 @@
 .theme-nordic .sh-subtitle { color: #3a2808; }
 
 [data-theme="nordic"] .sh-seal-circle,
-.theme-nordic .sh-seal-circle {
-    background: radial-gradient(circle, #3a2808 0%, #1a1004 100%);
-    border-color: #5a4010;
+.theme-nordic .sh-seal-circle,
+[data-theme="nordic"] .sh-footer-seal,
+.theme-nordic .sh-footer-seal {
+    --seal-rim: #8c6a33;
+    --seal-ink: #ffe3a4;
 }
-[data-theme="nordic"] .sh-seal-circle svg,
-.theme-nordic .sh-seal-circle svg { fill: #c89840; }
 [data-theme="nordic"] .sh-seal-label,
 .theme-nordic .sh-seal-label { color: #5a4010; }
 
@@ -101,4 +101,4 @@
 [data-theme="nordic"] .sh-footer-text,
 .theme-nordic .sh-footer-text { color: #5a4010; }
 [data-theme="nordic"] .sh-footer-seal,
-.theme-nordic .sh-footer-seal { background: #5a4010; }
+.theme-nordic .sh-footer-seal { border-color: #8c6a33; }

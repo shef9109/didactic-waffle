@@ -46,12 +46,12 @@
 .theme-oriental .sh-subtitle { color: #3a1808; }
 
 [data-theme="oriental"] .sh-seal-circle,
-.theme-oriental .sh-seal-circle {
-    background: radial-gradient(circle, #8a1808 0%, #4a0804 100%);
-    border-color: #8a2808;
+.theme-oriental .sh-seal-circle,
+[data-theme="oriental"] .sh-footer-seal,
+.theme-oriental .sh-footer-seal {
+    --seal-rim: #b65428;
+    --seal-ink: #ffd082;
 }
-[data-theme="oriental"] .sh-seal-circle svg,
-.theme-oriental .sh-seal-circle svg { fill: #f8c060; }
 [data-theme="oriental"] .sh-seal-label,
 .theme-oriental .sh-seal-label { color: #8a2808; }
 
@@ -104,4 +104,4 @@
 [data-theme="oriental"] .sh-footer-text,
 .theme-oriental .sh-footer-text { color: #8a2808; }
 [data-theme="oriental"] .sh-footer-seal,
-.theme-oriental .sh-footer-seal { background: #8a2808; }
+.theme-oriental .sh-footer-seal { border-color: #b65428; }
