@@ -53,6 +53,11 @@
 
     /* Переходы */
     --transition:     0.2s ease;
+    --tr:             var(--transition);
+
+    /* aliases used by page-level styles */
+    --panel-solid:    var(--panel);
+    --bg-solid:       var(--bg);
 }
 
 /* ── СБРОС И БАЗА ── */
@@ -451,4 +456,47 @@ body[data-site-theme="oriental"] {
     --text-bright: #f2ceb4;
     --bg: #100703;
     --bg-deep: #090301;
+}
+
+@media (max-width: 760px) {
+    .nav {
+        padding: 0 10px;
+        gap: 8px;
+    }
+
+    .nav-logo {
+        font-size: 0.72rem;
+        max-width: 42%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .nav-links {
+        flex: 1;
+        justify-content: flex-end;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        padding: 6px 8px;
+        font-size: 0.52rem;
+        letter-spacing: 0.14em;
+        white-space: nowrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

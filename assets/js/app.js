@@ -1,8 +1,8 @@
-/* ═══════════════════════════════════════════════════════════════
+﻿/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
    app.js — Точка входа генератора
    Рендер анкеты ТОЛЬКО по кнопке «Применить изменения».
    State обновляется при вводе, но анкета — нет.
-═══════════════════════════════════════════════════════════════ */
+в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */
 
 (function () {
 
@@ -26,7 +26,7 @@
         setDirty(false);
     }
 
-    /* ══ DIRTY FLAG ══ */
+    /* в•ђв•ђ DIRTY FLAG в•ђв•ђ */
     function setDirty(val) {
         _dirty = val;
 
@@ -55,7 +55,7 @@
             : 'предпросмотр';
     }
 
-    /* ══ TOAST ══ */
+    /* в•ђв•ђ TOAST в•ђв•ђ */
     function showToast(msg, type = 'default') {
         document.querySelector('.toast')?.remove();
         const t = document.createElement('div');
@@ -80,15 +80,28 @@
         showToast('↺ Данные сброшены');
     }
 
-    /* ══ URL PARAMS ══ */
+    /* в•ђв•ђ URL PARAMS в•ђв•ђ */
     function readURLParams() {
         const p = new URLSearchParams(window.location.search);
-        if (p.get('type'))   State.setMeta('type',   p.get('type'));
-        if (p.get('system')) State.setMeta('system', p.get('system'));
-        if (p.get('theme'))  { State.setMeta('theme', p.get('theme')); Themes.apply(p.get('theme')); }
+        const urlType = p.get('type');
+        const urlSystem = p.get('system');
+        const urlTheme = p.get('theme');
+
+        if (urlSystem) State.setMeta('system', urlSystem);
+
+        if (urlTheme) {
+            if (typeof SiteTheme !== 'undefined') {
+                SiteTheme.set(urlTheme);
+            } else {
+                State.setMeta('theme', urlTheme);
+                Themes.apply(urlTheme);
+            }
+        }
+
+        return { type: urlType, system: urlSystem, theme: urlTheme };
     }
 
-    /* ══ ACTIVE NAV ══ */
+    /* в•ђв•ђ ACTIVE NAV в•ђв•ђ */
     function markActiveNav() {
         const cur = window.location.pathname.split('/').pop();
         document.querySelectorAll('.nav-links a').forEach(a => {
@@ -96,7 +109,7 @@
         });
     }
 
-    /* ══ КНОПКИ ══ */
+    /* в•ђв•ђ РљРќРћРџРљР в•ђв•ђ */
     function bindButtons() {
 
         /* Применить */
@@ -107,16 +120,55 @@
             showToast('✦ Анкета обновлена', 'success');
         });
 
+        const withFreshSheet = (fn) => {
+            if (_dirty) {
+                renderSheet();
+                setTimeout(fn, 220);
+            } else {
+                fn();
+            }
+        };
+
         /* Скачать HTML — если dirty, сначала применяет */
         document.getElementById('btn-export-html')?.addEventListener('click', () => {
             const go = () => { Export.downloadHTML(); showToast('↓ Скачивание начато'); };
-            if (_dirty) { renderSheet(); setTimeout(go, 200); } else { go(); }
+            withFreshSheet(go);
         });
 
-        /* Печать */
-        document.getElementById('btn-print')?.addEventListener('click', () => {
-            if (_dirty) { renderSheet(); setTimeout(() => Export.printSheet(), 200); }
-            else Export.printSheet();
+        document.getElementById('btn-export-png')?.addEventListener('click', () => {
+            withFreshSheet(async () => {
+                try {
+                    await Export.exportImage('png');
+                    showToast('🖼 PNG экспортирован', 'success');
+                } catch (err) {
+                    console.error(err);
+                    showToast('✗ PNG экспорт не удался', 'error');
+                }
+            });
+        });
+
+        document.getElementById('btn-export-jpg')?.addEventListener('click', () => {
+            withFreshSheet(async () => {
+                try {
+                    await Export.exportImage('jpg');
+                    showToast('🖼 JPG экспортирован', 'success');
+                } catch (err) {
+                    console.error(err);
+                    showToast('✗ JPG экспорт не удался', 'error');
+                }
+            });
+        });
+
+        document.getElementById('btn-export-webp')?.addEventListener('click', () => {
+            withFreshSheet(async () => {
+                try {
+                    await Export.exportImage('webp');
+                    showToast('🖼 WEBP экспортирован', 'success');
+                } catch (err) {
+                    console.error(err);
+                    showToast('✗ WEBP экспорт не удался', 'error');
+                }
+            });
         });
 
         /* Сохранить JSON */
@@ -147,10 +199,19 @@
 
     /* ══ ЗАПУСК ══ */
     document.addEventListener('DOMContentLoaded', () => {
-        readURLParams();
         Storage.load();
+        Storage.enableAutosave();
         Themes.init();
         Sidebar.init();
+
+        const params = readURLParams();
+        if (params.theme && typeof Sidebar.renderThemePicker === 'function') {
+            Sidebar.renderThemePicker();
+        }
+        if (params.type && typeof Sidebar.applyTypeTemplate === 'function') {
+            Sidebar.applyTypeTemplate(params.type, true);
+        }
+
         renderSheet();           /* первый рендер — не dirty */
 
         /* Подписываемся ПОСЛЕ первого рендера, чтобы он не помечал dirty */

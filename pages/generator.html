@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,9 @@
     <link rel="stylesheet" id="theme-link" href="../assets/css/themes/medieval.css">
     <style>
 
-        /* ══════════════════════════════════════════════════
-           КНОПКА «ПРИМЕНИТЬ» — главный акцент интерфейса
-        ══════════════════════════════════════════════════ */
+        /* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
+           РљРќРћРџРљРђ В«РџР РРњР•РќРРўР¬В» вЂ” РіР»Р°РІРЅС‹Р№ Р°РєС†РµРЅС‚ РёРЅС‚РµСЂС„РµР№СЃР°
+        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */
         .btn-apply {
             width: 100%;
             display: flex;
@@ -86,9 +86,9 @@
             50%     { opacity: .25; }
         }
 
-        /* ══════════════════════════════════════════════════
+        /* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
            СЕТКА КНОПОК ЭКСПОРТА (2×2)
-        ══════════════════════════════════════════════════ */
+        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */
         .export-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -143,16 +143,40 @@
         .xbtn--html:hover .xbtn-icon { transform: translateY(3px); }
 
         /* ── Печать — бордовый ── */
-        .xbtn--print {
-            background: linear-gradient(160deg, #1c1010 0%, #100808 100%);
-            color: #7a4040;
-            border: 1px solid #281414;
+                .xbtn--png {
+            background: linear-gradient(160deg, #101a20 0%, #09131a 100%);
+            color: #4f9ebf;
+            border: 1px solid #1a2b35;
         }
-        .xbtn--print:hover {
-            background: linear-gradient(160deg, #261616 0%, #180e0e 100%);
-            color: #c07878;
-            border-color: #6a2a2a;
-            box-shadow: 0 4px 20px rgba(100,30,30,.3), inset 0 1px 0 rgba(200,80,80,.06);
+        .xbtn--png:hover {
+            background: linear-gradient(160deg, #152430 0%, #0d1a24 100%);
+            color: #8fd7f5;
+            border-color: #2f6f8f;
+            box-shadow: 0 4px 20px rgba(30,90,120,.3), inset 0 1px 0 rgba(120,200,240,.08);
+        }
+
+        .xbtn--jpg {
+            background: linear-gradient(160deg, #20160f 0%, #161008 100%);
+            color: #b8863a;
+            border: 1px solid #3a2815;
+        }
+        .xbtn--jpg:hover {
+            background: linear-gradient(160deg, #2a1f14 0%, #1a140d 100%);
+            color: #e0b870;
+            border-color: #7c5427;
+            box-shadow: 0 4px 20px rgba(120,80,30,.3), inset 0 1px 0 rgba(220,170,90,.08);
+        }
+
+        .xbtn--webp {
+            background: linear-gradient(160deg, #171024 0%, #0f0a18 100%);
+            color: #8f72c7;
+            border: 1px solid #2d2145;
+        }
+        .xbtn--webp:hover {
+            background: linear-gradient(160deg, #211634 0%, #151024 100%);
+            color: #c6aaff;
+            border-color: #5d45a0;
+            box-shadow: 0 4px 20px rgba(80,55,140,.3), inset 0 1px 0 rgba(170,130,255,.08);
         }
 
         /* ── Сохранить — синий ── */
@@ -204,7 +228,7 @@
             background: rgba(120,20,20,.07);
         }
 
-        /* ══ Иконка-кнопка в шапке сайдбара ══ */
+        /* в•ђв•ђ РРєРѕРЅРєР°-РєРЅРѕРїРєР° РІ С€Р°РїРєРµ СЃР°Р№РґР±Р°СЂР° в•ђв•ђ */
         .sb-icon-btn {
             width: 30px; height: 30px;
             display: flex; align-items: center; justify-content: center;
@@ -273,11 +297,31 @@
             to   { opacity:1; transform:none; }
         }
 
+        @media (max-width: 1180px) {
+            .export-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 760px) {
+            .export-grid { grid-template-columns: repeat(2, 1fr); }
+            .xbtn { padding: 10px 8px; font-size: 0.48rem; letter-spacing: 0.14em; }
+            .xbtn-icon { font-size: 1.08rem; }
+        }
+
+        @media (max-width: 520px) {
+            .export-grid { grid-template-columns: 1fr; }
+            .toast {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                min-width: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-<!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+<!-- в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ РќРђР’РР“РђР¦РРЇ в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ -->
 <nav class="nav">
     <a href="../index.html" class="nav-logo">
         <span class="nav-logo-icon">⚔</span> Кузница Анкет
@@ -301,76 +345,99 @@
             <div class="sidebar-title">⚔ Редактор</div>
         </div>
 
-        <!-- Прокручиваемое тело -->
-        <div class="sidebar-body">
+        <!-- Прокручиваемое тело -->        <div class="sidebar-body">
 
-            <!-- ТЕМА -->
+            <div class="section-divider" id="section-type">Вид анкеты</div>
+            <div id="type-picker" class="picker-grid picker-grid--types"></div>
+
             <div class="section-divider">Тема оформления</div>
             <div id="theme-picker" class="theme-picker"></div>
 
-            <!-- ЛИЧНОСТЬ -->
-            <div class="section-divider">Личность</div>
+            <div class="section-divider" id="section-seal">Печать</div>
+            <div id="seal-picker" class="picker-grid picker-grid--seals"></div>
+            <div id="seal-style-picker" class="seal-style-picker picker-grid picker-grid--seal-style"></div>
+
+            <div class="section-divider" id="section-personality">Личность</div>
 
             <div class="form-group">
-                <label class="form-label">Имя персонажа</label>
+                <label class="form-label" id="lbl-name">Имя персонажа</label>
                 <input class="sb-input" type="text" id="f-name" placeholder="Имя...">
             </div>
             <div class="form-group">
-                <label class="form-label">Класс · Роль · Прозвище</label>
+                <label class="form-label" id="lbl-class">Класс · Роль · Прозвище</label>
                 <input class="sb-input" type="text" id="f-class" placeholder="Паладин · Страж...">
             </div>
             <div class="form-group">
-                <label class="form-label">Фракция / Орден</label>
+                <label class="form-label" id="lbl-order">Фракция / Орден</label>
                 <input class="sb-input" type="text" id="f-order" placeholder="Орден Перчатки...">
             </div>
             <div class="form-group">
-                <label class="form-label">Девиз / Цитата</label>
+                <label class="form-label" id="lbl-quote">Девиз / Цитата</label>
                 <input class="sb-input" type="text" id="f-quote" placeholder="Девиз персонажа...">
             </div>
             <div class="form-group">
-                <label class="form-label">Мировоззрение</label>
+                <label class="form-label" id="lbl-alignment">Мировоззрение</label>
                 <input class="sb-input" type="text" id="f-alignment" placeholder="Законопослушное доброе...">
             </div>
             <div class="form-group">
-                <label class="form-label">Подпись к мировоззрению</label>
+                <label class="form-label" id="lbl-align-desc">Подпись к мировоззрению</label>
                 <input class="sb-input" type="text" id="f-align-desc" placeholder="Личный кодекс...">
             </div>
+            <div class="form-group hidden" id="group-photo">
+                <label class="form-label">Портрет героя (JPG/PNG/WEBP)</label>
+                <input class="sb-input" type="file" id="f-photo" accept="image/png,image/jpeg,image/webp,image/jpg">
+                <div class="photo-adjust">
+                    <div class="photo-range-row">
+                        <label class="form-label form-label-tight" for="f-photo-x">Позиция X</label>
+                        <input class="photo-range" type="range" id="f-photo-x" min="0" max="100" step="1" value="50">
+                        <span class="photo-range-value" id="f-photo-x-value">50%</span>
+                    </div>
+                    <div class="photo-range-row">
+                        <label class="form-label form-label-tight" for="f-photo-y">Позиция Y</label>
+                        <input class="photo-range" type="range" id="f-photo-y" min="0" max="100" step="1" value="50">
+                        <span class="photo-range-value" id="f-photo-y-value">50%</span>
+                    </div>
+                    <div class="photo-range-row">
+                        <label class="form-label form-label-tight" for="f-photo-scale">Масштаб</label>
+                        <input class="photo-range" type="range" id="f-photo-scale" min="60" max="180" step="1" value="100">
+                        <span class="photo-range-value" id="f-photo-scale-value">100%</span>
+                    </div>
+                    <button class="btn-danger-soft" id="btn-reset-photo-frame" type="button">Сбросить кадр</button>
+                </div>
+                <button class="btn-danger-soft" id="btn-clear-photo" type="button">Очистить портрет</button>
+            </div>
 
-            <!-- ХАРАКТЕРИСТИКИ -->
-            <div class="section-divider">Характеристики</div>
+            <div class="section-divider" id="section-stats">Характеристики</div>
             <div id="stats-list" class="stats-list"></div>
-            <button class="btn-add" id="btn-add-stat">+ Добавить характеристику</button>
+            <button class="btn-add" id="btn-add-stat">+ Добавить параметр</button>
 
-            <!-- ОПИСАНИЕ -->
-            <div class="section-divider">Описание</div>
+            <div class="section-divider" id="section-description">Описание</div>
 
             <div class="form-group">
-                <label class="form-label">Характер</label>
+                <label class="form-label" id="lbl-personality">Характер</label>
                 <textarea class="sb-textarea" id="f-personality" rows="3" placeholder="Черты характера..."></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label">Физические качества</label>
+                <label class="form-label" id="lbl-physical">Физические качества</label>
                 <textarea class="sb-textarea" id="f-physical" rows="3" placeholder="Телосложение, выносливость..."></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label">Навыки и таланты</label>
+                <label class="form-label" id="lbl-skills">Навыки и таланты</label>
                 <textarea class="sb-textarea" id="f-skills" rows="3" placeholder="Особые умения..."></textarea>
             </div>
 
-            <!-- СНАРЯЖЕНИЕ -->
-            <div class="section-divider">Снаряжение</div>
+            <div class="section-divider" id="section-equip">Снаряжение</div>
             <div id="equip-list" class="equip-list"></div>
             <button class="btn-add" id="btn-add-equip">+ Добавить предмет</button>
 
-            <!-- ФИНАЛ -->
-            <div class="section-divider">Финал</div>
+            <div class="section-divider" id="section-final">Финал</div>
 
             <div class="form-group">
-                <label class="form-label">Итоговая фраза</label>
+                <label class="form-label" id="lbl-final-quote">Итоговая фраза</label>
                 <textarea class="sb-textarea" id="f-final-quote" rows="2" placeholder="Цитата о персонаже..."></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label">Текст подвала</label>
+                <label class="form-label" id="lbl-footer">Текст подвала</label>
                 <input class="sb-input" type="text" id="f-footer" placeholder="Орден · Город · Статус">
             </div>
 
@@ -379,23 +446,33 @@
         <!-- ────────── ПОДВАЛ САЙДБАРА ────────── -->
         <div class="sidebar-footer">
 
-            <!-- ★ ГЛАВНАЯ КНОПКА ★ -->
+            <!-- в… Р“Р›РђР’РќРђРЇ РљРќРћРџРљРђ в… -->
             <button class="btn-apply" id="btn-apply">
                 <span class="apply-dot"></span>
                 <span class="apply-text">Анкета обновлена ✓</span>
             </button>
 
             <!-- Сетка кнопок экспорта -->
-            <div class="export-grid">
+                        <div class="export-grid">
 
                 <button class="xbtn xbtn--html" id="btn-export-html">
                     <span class="xbtn-icon">⬇</span>
                     <span>Скачать HTML</span>
                 </button>
 
-                <button class="xbtn xbtn--print" id="btn-print">
-                    <span class="xbtn-icon">🖨</span>
-                    <span>Печать / PDF</span>
+                <button class="xbtn xbtn--png" id="btn-export-png">
+                    <span class="xbtn-icon">🖼</span>
+                    <span>Экспорт PNG</span>
+                </button>
+
+                <button class="xbtn xbtn--jpg" id="btn-export-jpg">
+                    <span class="xbtn-icon">🖼</span>
+                    <span>Экспорт JPG</span>
+                </button>
+
+                <button class="xbtn xbtn--webp" id="btn-export-webp">
+                    <span class="xbtn-icon">🖼</span>
+                    <span>Экспорт WEBP</span>
                 </button>
 
                 <button class="xbtn xbtn--save" id="btn-save-json">
@@ -443,3 +520,5 @@
 
 </body>
 </html>
+
+

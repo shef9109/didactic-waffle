@@ -11,7 +11,92 @@
         /* ══════════════════════════════════════════
            ФОНОВЫЕ СЛОИ
         ══════════════════════════════════════════ */
-        body { overflow-x: hidden; }
+        body {
+            overflow-x: hidden;
+
+            /* Глобальные переменные главной (дефолт: medieval) */
+            --home-top-glow: rgba(80,40,8,0.7);
+            --home-mid-glow: rgba(50,25,5,0.4);
+            --home-low-glow: rgba(40,15,5,0.3);
+
+            --type-card-bg: linear-gradient(160deg, #f7ebc6 0%, #eada90 38%, #f2e2ac 100%);
+            --type-card-head-bg: linear-gradient(135deg, #1c1409 0%, #281c0c 100%);
+            --type-card-inner-border: rgba(139,90,20,0.2);
+            --type-card-inner-border-hover: rgba(139,90,20,0.4);
+            --type-card-inset-shadow: rgba(139,90,20,0.04);
+            --type-card-inset-shadow-hover: rgba(139,90,20,0.07);
+            --type-card-glow: rgba(200,168,75,0.07);
+            --type-card-glow-strong: rgba(200,168,75,0.14);
+            --type-title-color: #ecd898;
+            --type-tag-bg: rgba(139,90,20,0.07);
+            --type-foot-bg: rgba(139,90,20,0.045);
+            --type-highlight-head-line: linear-gradient(180deg, #ffe060, var(--gold));
+            --type-font-head: var(--font-heading);
+            --type-font-body: var(--font-body);
+        }
+
+        body[data-site-theme="arcane"] {
+            --home-top-glow: rgba(88,54,170,0.5);
+            --home-mid-glow: rgba(60,36,120,0.34);
+            --home-low-glow: rgba(34,18,68,0.28);
+
+            --type-card-bg: linear-gradient(160deg, #1b1330 0%, #140d24 45%, #201638 100%);
+            --type-card-head-bg: linear-gradient(135deg, #0f0a1e 0%, #1b1230 100%);
+            --type-card-inner-border: rgba(132,102,200,0.28);
+            --type-card-inner-border-hover: rgba(162,132,230,0.42);
+            --type-card-inset-shadow: rgba(96,64,160,0.1);
+            --type-card-inset-shadow-hover: rgba(120,84,190,0.14);
+            --type-card-glow: rgba(120,84,190,0.16);
+            --type-card-glow-strong: rgba(150,112,220,0.28);
+            --type-title-color: #d9caff;
+            --type-tag-bg: rgba(96,64,160,0.22);
+            --type-foot-bg: rgba(96,64,160,0.14);
+            --type-highlight-head-line: linear-gradient(180deg, #d8c6ff, var(--gold));
+            --type-font-head: var(--font-display);
+            --type-font-body: var(--font-body);
+        }
+
+        body[data-site-theme="nordic"] {
+            --home-top-glow: rgba(122,88,34,0.54);
+            --home-mid-glow: rgba(78,56,20,0.34);
+            --home-low-glow: rgba(56,38,14,0.25);
+
+            --type-card-bg: linear-gradient(160deg, #ece1c9 0%, #dbc79b 40%, #e8d4ad 100%);
+            --type-card-head-bg: linear-gradient(135deg, #1f170d 0%, #2c2112 100%);
+            --type-card-inner-border: rgba(106,78,34,0.28);
+            --type-card-inner-border-hover: rgba(130,100,48,0.42);
+            --type-card-inset-shadow: rgba(90,60,10,0.06);
+            --type-card-inset-shadow-hover: rgba(90,60,10,0.11);
+            --type-card-glow: rgba(141,118,80,0.12);
+            --type-card-glow-strong: rgba(160,132,86,0.24);
+            --type-title-color: #f0d9ad;
+            --type-tag-bg: rgba(106,78,34,0.12);
+            --type-foot-bg: rgba(106,78,34,0.08);
+            --type-highlight-head-line: linear-gradient(180deg, #d8b574, var(--gold));
+            --type-font-head: var(--font-heading);
+            --type-font-body: var(--font-body);
+        }
+
+        body[data-site-theme="oriental"] {
+            --home-top-glow: rgba(164,70,28,0.5);
+            --home-mid-glow: rgba(106,44,16,0.35);
+            --home-low-glow: rgba(72,24,10,0.26);
+
+            --type-card-bg: linear-gradient(160deg, #fdf2df 0%, #f3ddb6 40%, #f6e4c5 100%);
+            --type-card-head-bg: linear-gradient(135deg, #2a130a 0%, #3a1c10 100%);
+            --type-card-inner-border: rgba(143,63,18,0.26);
+            --type-card-inner-border-hover: rgba(168,84,34,0.42);
+            --type-card-inset-shadow: rgba(143,63,18,0.08);
+            --type-card-inset-shadow-hover: rgba(163,77,28,0.12);
+            --type-card-glow: rgba(197,106,44,0.14);
+            --type-card-glow-strong: rgba(214,132,76,0.27);
+            --type-title-color: #ffd4ad;
+            --type-tag-bg: rgba(143,63,18,0.12);
+            --type-foot-bg: rgba(143,63,18,0.08);
+            --type-highlight-head-line: linear-gradient(180deg, #f6b57b, var(--gold));
+            --type-font-head: var(--font-display);
+            --type-font-body: var(--font-body);
+        }
 
         /* Звёздный/искровой фон */
         .bg-canvas {
@@ -20,9 +105,9 @@
             z-index: 0;
             pointer-events: none;
             background:
-                    radial-gradient(ellipse 90% 70% at 50% -10%, rgba(80,40,8,0.7)  0%, transparent 60%),
-                    radial-gradient(ellipse 60% 50% at 15% 50%,  rgba(50,25,5,0.4)  0%, transparent 55%),
-                    radial-gradient(ellipse 50% 60% at 85% 80%,  rgba(40,15,5,0.3)  0%, transparent 50%),
+                    radial-gradient(ellipse 90% 70% at 50% -10%, var(--home-top-glow) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 50% at 15% 50%, var(--home-mid-glow) 0%, transparent 55%),
+                    radial-gradient(ellipse 50% 60% at 85% 80%, var(--home-low-glow) 0%, transparent 50%),
                     #07040100;
             background-color: #07040100;
         }
@@ -225,113 +310,220 @@
             font-size: 0.95rem;
         }
 
+        /* ══════════════════════════════════════════
+           КАРТОЧКИ — пергаментный стиль
+        ══════════════════════════════════════════ */
+
         .types-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--panel-border);
-            border: 1px solid var(--panel-border);
+            gap: 22px;
             max-width: 1100px;
             margin: 0 auto;
-            box-shadow:
-                    0 0 0 1px rgba(139,90,20,0.2),
-                    0 20px 60px rgba(0,0,0,0.7);
         }
 
+        /* Базовая карточка */
         .type-card {
-            background: var(--panel-solid);
-            padding: 34px 28px 28px;
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 12px;
             text-decoration: none;
             color: inherit;
-            position: relative;
-            transition: background var(--tr);
             overflow: hidden;
+            cursor: pointer;
+
+            /* Пергаментный фон */
+            background: var(--type-card-bg);
+
+            /* Рамка в стиле анкеты */
+            box-shadow:
+                    0 0 0 1px var(--gold-dark),
+                    0 0 0 5px #0b0900,
+                    0 0 0 6px var(--gold-dark),
+                    0 16px 48px rgba(0,0,0,0.72),
+                    inset 0 0 60px var(--type-card-inset-shadow);
+
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
         }
-        .type-card::before {
+
+        /* Внутренняя тонкая рамка */
+        .type-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
-            transform: scaleX(0);
-            transition: transform 0.35s ease;
-        }
-        .type-card:hover { background: var(--panel-light); }
-        .type-card:hover::before { transform: scaleX(1); }
-
-        .type-card--highlight {
-            background: linear-gradient(160deg, #1c1710 0%, #141008 100%);
-            box-shadow: inset 0 0 0 1px rgba(139,90,20,0.2);
-        }
-        .type-card--highlight::before {
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            inset: 8px;
+            border: 1px solid var(--type-card-inner-border);
+            pointer-events: none;
+            z-index: 1;
+            transition: border-color 0.28s ease;
         }
 
-        .type-card--soon {
-            cursor: default;
-            opacity: 0.5;
+        .type-card:not(.type-card--soon):hover {
+            transform: translateY(-5px);
+            box-shadow:
+                    0 0 0 1px var(--gold),
+                    0 0 0 5px #0b0900,
+                    0 0 0 6px var(--gold),
+                    0 24px 64px rgba(0,0,0,0.85),
+                    0 0 24px var(--type-card-glow),
+                    inset 0 0 60px var(--type-card-inset-shadow-hover);
         }
-        .type-card--soon:hover { background: var(--panel-solid); }
-        .type-card--soon::before { display: none; }
+        .type-card:not(.type-card--soon):hover::after {
+            border-color: var(--type-card-inner-border-hover);
+        }
+
+        /* ── Шапка карточки ── */
+        .type-card-head {
+            background: var(--type-card-head-bg);
+            padding: 15px 18px 13px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--gold-dark);
+            position: relative;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        /* Золотая левая полоса */
+        .type-card-head::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+        }
 
         .type-icon {
-            font-size: 2rem;
+            font-size: 1.65rem;
             line-height: 1;
-            margin-bottom: 4px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 7px rgba(200,168,75,0.38));
         }
 
+        .type-head-text { flex: 1; }
+
         .type-title {
-            font-family: var(--font-heading);
-            font-size: 0.78rem;
+            font-family: var(--type-font-head);
+            font-size: 0.72rem;
             font-weight: 700;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--text-bright);
+            color: var(--type-title-color);
+            line-height: 1.2;
         }
         .type-role {
-            font-family: var(--font-heading);
-            font-size: 0.54rem;
-            letter-spacing: 0.25em;
+            font-family: var(--type-font-head);
+            font-size: 0.5rem;
+            letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--blood);
+            margin-top: 3px;
+            opacity: 0.9;
         }
-        .type-desc {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: var(--text-dim);
+
+        /* ── Тело карточки ── */
+        .type-card-body {
+            padding: 15px 18px 12px;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .type-desc {
+            font-family: var(--type-font-body);
+            font-size: 0.88rem;
+            line-height: 1.72;
+            color: var(--ink-light);
+            flex: 1;
+        }
+
+        body[data-site-theme="arcane"] .type-role,
+        body[data-site-theme="arcane"] .type-desc {
+            color: var(--type-title-color);
+            opacity: 1;
         }
 
         .type-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 6px;
+            gap: 5px;
         }
         .type-tag {
-            font-family: var(--font-heading);
-            font-size: 0.5rem;
+            font-family: var(--type-font-head);
+            font-size: 0.46rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            padding: 3px 9px;
-            border: 1px solid var(--gold-dim);
-            color: var(--gold-dim);
+            padding: 2px 8px;
+            border: 1px solid var(--gold-dark);
+            color: var(--gold-dark);
+            background: var(--type-tag-bg);
+        }
+
+        /* ── Нижняя строка карточки ── */
+        .type-card-foot {
+            border-top: 1px solid var(--gold-dark);
+            padding: 9px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--type-foot-bg);
+            flex-shrink: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .type-foot-label {
+            font-family: var(--type-font-head);
+            font-size: 0.47rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            opacity: 0.65;
         }
 
         .type-arrow {
-            align-self: flex-end;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             color: var(--gold-dark);
-            transition: transform var(--tr), color var(--tr);
-            margin-top: 6px;
+            line-height: 1;
+            transition: transform 0.25s ease, color 0.25s ease;
         }
         .type-card:not(.type-card--soon):hover .type-arrow {
             transform: translateX(5px);
-            color: var(--gold);
+            color: var(--blood);
+        }
+
+        /* ── Выделенная «Свободная» ── */
+        .type-card--highlight {
+            box-shadow:
+                    0 0 0 1px var(--gold),
+                    0 0 0 5px #0b0900,
+                    0 0 0 6px var(--gold),
+                    0 16px 48px rgba(0,0,0,0.72),
+                    0 0 18px var(--type-card-glow),
+                    inset 0 0 60px rgba(200,168,75,0.06);
+        }
+        .type-card--highlight .type-card-head::before {
+            width: 4px;
+            background: var(--type-highlight-head-line);
+        }
+        .type-card--highlight:not(.type-card--soon):hover {
+            box-shadow:
+                    0 0 0 1px var(--gold-light),
+                    0 0 0 5px #0b0900,
+                    0 0 0 6px var(--gold-light),
+                    0 24px 64px rgba(0,0,0,0.88),
+                    0 0 30px var(--type-card-glow-strong),
+                    inset 0 0 70px rgba(200,168,75,0.09);
+        }
+
+        /* ── Заблокированная ── */
+        .type-card--soon {
+            cursor: default;
+            opacity: 0.36;
+            filter: grayscale(0.35);
         }
 
         /* ── ПОДВАЛ ── */
@@ -442,77 +634,138 @@
 
         <div class="types-grid">
 
+            <!-- Ролевая -->
             <a href="pages/generator.html?type=roleplay" class="type-card">
-                <div class="type-icon">⚔</div>
-                <div class="type-title">Ролевая</div>
-                <div class="type-role">Для настольных RPG</div>
-                <p class="type-desc">Характеристики, снаряжение, мировоззрение, история. Подходит для D&D, Pathfinder, авторских систем.</p>
-                <div class="type-tags">
-                    <span class="type-tag">D&D 5e</span>
-                    <span class="type-tag">Pathfinder</span>
-                    <span class="type-tag">Своя система</span>
+                <div class="type-card-head">
+                    <div class="type-icon">⚔</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Ролевая</div>
+                        <div class="type-role">Для настольных RPG</div>
+                    </div>
                 </div>
-                <div class="type-arrow">→</div>
+                <div class="type-card-body">
+                    <p class="type-desc">Характеристики, снаряжение, мировоззрение, история. Подходит для D&D, Pathfinder, авторских систем.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">D&D 5e</span>
+                        <span class="type-tag">Pathfinder</span>
+                        <span class="type-tag">Своя система</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Выбрать тип</span>
+                    <span class="type-arrow">→</span>
+                </div>
             </a>
 
+            <!-- Гильдейская -->
             <a href="pages/generator.html?type=guild" class="type-card">
-                <div class="type-icon">🛡</div>
-                <div class="type-title">Гильдейская</div>
-                <div class="type-role">Досье члена гильдии</div>
-                <p class="type-desc">Ранг, специализация, выполненные задания, репутация. Для торговых домов, орденов, воровских гильдий.</p>
-                <div class="type-tags">
-                    <span class="type-tag">Орден</span>
-                    <span class="type-tag">Гильдия</span>
-                    <span class="type-tag">Братство</span>
+                <div class="type-card-head">
+                    <div class="type-icon">🛡</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Гильдейская</div>
+                        <div class="type-role">Досье члена гильдии</div>
+                    </div>
                 </div>
-                <div class="type-arrow">→</div>
+                <div class="type-card-body">
+                    <p class="type-desc">Ранг, специализация, выполненные задания, репутация. Для торговых домов, орденов, воровских гильдий.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">Орден</span>
+                        <span class="type-tag">Гильдия</span>
+                        <span class="type-tag">Братство</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Выбрать тип</span>
+                    <span class="type-arrow">→</span>
+                </div>
             </a>
 
+            <!-- Боевая -->
             <a href="pages/generator.html?type=combat" class="type-card">
-                <div class="type-icon">🗡</div>
-                <div class="type-title">Боевая</div>
-                <div class="type-role">Упор на механику боя</div>
-                <p class="type-desc">Боевые навыки, оружие, доспехи, тактические особенности. Компактный формат для сражений.</p>
-                <div class="type-tags">
-                    <span class="type-tag">Воин</span>
-                    <span class="type-tag">Тактика</span>
-                    <span class="type-tag">Арсенал</span>
+                <div class="type-card-head">
+                    <div class="type-icon">🗡</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Боевая</div>
+                        <div class="type-role">Упор на механику боя</div>
+                    </div>
                 </div>
-                <div class="type-arrow">→</div>
+                <div class="type-card-body">
+                    <p class="type-desc">Боевые навыки, оружие, доспехи, тактические особенности. Компактный формат для сражений.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">Воин</span>
+                        <span class="type-tag">Тактика</span>
+                        <span class="type-tag">Арсенал</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Выбрать тип</span>
+                    <span class="type-arrow">→</span>
+                </div>
             </a>
 
+            <!-- Магическая -->
             <a href="pages/generator.html?type=arcane" class="type-card">
-                <div class="type-icon">✦</div>
-                <div class="type-title">Магическая</div>
-                <div class="type-role">Для магов и чародеев</div>
-                <p class="type-desc">Школы магии, заклинания, источник силы, артефакты. Для тех, чья сила в знаниях и волшбе.</p>
-                <div class="type-tags">
-                    <span class="type-tag">Заклинания</span>
-                    <span class="type-tag">Артефакты</span>
-                    <span class="type-tag">Школа</span>
+                <div class="type-card-head">
+                    <div class="type-icon">✦</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Магическая</div>
+                        <div class="type-role">Для магов и чародеев</div>
+                    </div>
                 </div>
-                <div class="type-arrow">→</div>
+                <div class="type-card-body">
+                    <p class="type-desc">Школы магии, заклинания, источник силы, артефакты. Для тех, чья сила в знаниях и волшбе.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">Заклинания</span>
+                        <span class="type-tag">Артефакты</span>
+                        <span class="type-tag">Школа</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Выбрать тип</span>
+                    <span class="type-arrow">→</span>
+                </div>
             </a>
 
+            <!-- Свободная — выделенная -->
             <a href="pages/generator.html?type=free" class="type-card type-card--highlight">
-                <div class="type-icon">◈</div>
-                <div class="type-title">Свободная</div>
-                <div class="type-role">Полная настройка</div>
-                <p class="type-desc">Сам решаешь какие поля нужны. Добавляй и удаляй характеристики и снаряжение без ограничений.</p>
-                <div class="type-tags">
-                    <span class="type-tag">Любая система</span>
-                    <span class="type-tag">Гибко</span>
+                <div class="type-card-head">
+                    <div class="type-icon">◈</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Свободная</div>
+                        <div class="type-role">Полная настройка</div>
+                    </div>
                 </div>
-                <div class="type-arrow">→</div>
+                <div class="type-card-body">
+                    <p class="type-desc">Сам решаешь какие поля нужны. Добавляй и удаляй характеристики и снаряжение без ограничений.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">Любая система</span>
+                        <span class="type-tag">Гибко</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Рекомендуется</span>
+                    <span class="type-arrow">→</span>
+                </div>
             </a>
 
+            <!-- Скоро -->
             <div class="type-card type-card--soon">
-                <div class="type-icon">⚗</div>
-                <div class="type-title">Алхимик</div>
-                <div class="type-role">Скоро</div>
-                <p class="type-desc">Рецепты зелий, ингредиенты, лаборатория. В разработке.</p>
-                <div class="type-tags">
-                    <span class="type-tag">В разработке</span>
+                <div class="type-card-head">
+                    <div class="type-icon">⚗</div>
+                    <div class="type-head-text">
+                        <div class="type-title">Алхимик</div>
+                        <div class="type-role">В разработке</div>
+                    </div>
+                </div>
+                <div class="type-card-body">
+                    <p class="type-desc">Рецепты зелий, ингредиенты, лаборатория. Скоро будет доступно.</p>
+                    <div class="type-tags">
+                        <span class="type-tag">Скоро</span>
+                    </div>
+                </div>
+                <div class="type-card-foot">
+                    <span class="type-foot-label">Недоступно</span>
+                    <span class="type-arrow" style="opacity:0.3">·</span>
                 </div>
             </div>
 

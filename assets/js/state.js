@@ -11,6 +11,11 @@ const State = (() => {
             theme:  'medieval',
             system: 'free',
             type:   'roleplay',
+            seal: 'gauntlet',
+            sealStyle: 'wax',
+            photoX: 50,
+            photoY: 50,
+            photoScale: 100,
         },
         character: {
             name:       'Вальдрик',
@@ -24,6 +29,7 @@ const State = (() => {
             skills:     'Тактика. Выживание. По следам на траве определит число врагов и час прохода. Холодная решимость — его обаяние.',
             finalQuote: 'Он не читал стихов — но по следам на траве мог сказать, сколько орков прошло здесь в полночь, и первым встать на их пути.',
             footer:     'Орден Перчатки · Сордкост · Действующий Страж',
+            portrait:   '',
         },
         stats: [
             { name: 'Сила',         val: '19' },
@@ -79,6 +85,11 @@ const State = (() => {
             notify();
         },
 
+        setCharacter(patch) {
+            _state.character = { ..._state.character, ...(patch || {}) };
+            notify();
+        },
+
         /* Обновить мету */
         setMeta(key, value) {
             _state.meta[key] = value;
@@ -100,6 +111,11 @@ const State = (() => {
             notify();
         },
 
+        replaceStats(items = []) {
+            _state.stats = deepClone(Array.isArray(items) ? items : []);
+            notify();
+        },
+
         removeStat(index) {
             _state.stats.splice(index, 1);
             notify();
@@ -117,6 +133,11 @@ const State = (() => {
 
         addEquip(name = '', desc = '') {
             _state.equips.push({ name, desc });
+            notify();
+        },
+
+        replaceEquips(items = []) {
+            _state.equips = deepClone(Array.isArray(items) ? items : []);
             notify();
         },
 

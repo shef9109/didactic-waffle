@@ -1,280 +1,351 @@
-/* ═══════════════════════════════════════════════════════════════
-   КУЗНИЦА АНКЕТ — sheet.css
-   Стили пергаментной анкеты. Используется в generator.html
-   и в экспортируемом HTML. Не зависит от интерфейса.
-═══════════════════════════════════════════════════════════════ */
-
-/* ── ОБЁРТКА ── */
+/* Sheet */
 .sheet {
     width: 760px;
     position: relative;
-    background:
-            linear-gradient(160deg, #f8edcc 0%, #ecdfa0 30%, #f0e0b0 65%, #d8c280 100%);
     color: var(--ink);
     font-family: var(--font-body);
+    background: linear-gradient(160deg, #f8edcc 0%, #ecdfa0 30%, #f0e0b0 65%, #d8c280 100%);
     box-shadow:
-            0 0 0 1px var(--gold-dark),
-            0 0 0 5px #130e06,
-            0 0 0 7px var(--gold-dark),
-            0 0 0 8px #0a0702,
-            0 0 80px rgba(0,0,0,0.95),
-            inset 0 0 100px rgba(139,90,20,0.06);
-    animation: sheetReveal 0.5s ease-out both;
+        0 0 0 1px var(--gold-dark),
+        0 0 0 5px #130e06,
+        0 0 0 7px var(--gold-dark),
+        0 0 0 8px #0a0702,
+        0 0 80px rgba(0, 0, 0, 0.95),
+        inset 0 0 100px rgba(139, 90, 20, 0.06);
 }
 
-@keyframes sheetReveal {
-    from { opacity: 0; transform: scale(0.984) translateY(10px); }
-    to   { opacity: 1; transform: none; }
-}
-
-/* ── УГЛОВЫЕ ОРНАМЕНТЫ ── */
 .sh-corner {
     position: absolute;
-    width: 58px; height: 58px;
+    width: 56px;
+    height: 56px;
     pointer-events: none;
-    z-index: 10;
+    z-index: 2;
+    opacity: 0.85;
 }
 .sh-corner svg { width: 100%; height: 100%; }
-.c-tl { top: 8px;    left: 8px; }
-.c-tr { top: 8px;    right: 8px;    transform: scaleX(-1); }
-.c-bl { bottom: 8px; left: 8px;    transform: scaleY(-1); }
-.c-br { bottom: 8px; right: 8px;   transform: scale(-1); }
+.c-tl { top: 8px; left: 8px; }
+.c-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+.c-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+.c-br { bottom: 8px; right: 8px; transform: scale(-1); }
 
-/* ── ШАПКА ── */
 .sh-header {
-    padding: 44px 58px 26px;
-    text-align: center;
-    border-bottom: 1px solid var(--gold-dark);
     position: relative;
+    border-bottom: 1px solid var(--gold-dark);
+    padding: 38px 54px 24px;
+    text-align: center;
 }
 
-.sh-order-tag {
-    display: block;
+.sh-type-tag {
     font-family: var(--font-heading);
-    font-size: 0.62rem;
-    letter-spacing: 0.42em;
-    color: var(--gold-dark);
+    font-size: 0.52rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
-    margin-bottom: 10px;
-    opacity: 0.85;
+    color: var(--text-dim);
+    margin-bottom: 8px;
 }
 
 .sh-name {
     font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 900;
+    font-size: 2.4rem;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
     color: var(--ink);
-    line-height: 1;
-    letter-spacing: 0.05em;
-    text-shadow: 2px 3px 0 rgba(139,90,20,0.18);
-    word-break: break-word;
 }
 
-.sh-divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 12px 0;
-}
-.sh-divider::before,
-.sh-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
-}
-.sh-divider span {
-    font-family: var(--font-heading);
-    font-size: 0.6rem;
-    letter-spacing: 0.42em;
-    color: var(--blood);
-    text-transform: uppercase;
-    white-space: nowrap;
+.sh-body {
+    padding: 24px 54px 36px;
+    line-height: 1.55;
 }
 
-.sh-subtitle {
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink-light);
-    line-height: 1.5;
-}
-
-/* ── ПЕЧАТЬ ОРДЕНА ── */
 .sh-seal {
     position: absolute;
-    top: 28px;
-    right: 50px;
+    top: 24px;
+    right: 44px;
     transform: rotate(-8deg);
 }
+
 .sh-seal-circle {
-    width: 68px; height: 68px;
+    width: 66px;
+    height: 66px;
     border-radius: 50%;
-    background: radial-gradient(circle, #7a1c1c 0%, #3a0a0a 100%);
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid var(--gold-dark);
-    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
-.sh-seal-circle svg { width: 40px; height: 40px; fill: var(--gold-light); }
+.sh-seal-circle svg { width: 38px; height: 38px; }
 .sh-seal-label {
+    margin-top: 6px;
     text-align: center;
     font-family: var(--font-heading);
-    font-size: 0.44rem;
+    font-size: 0.42rem;
     letter-spacing: 0.18em;
-    color: var(--gold-dark);
-    margin-top: 5px;
     text-transform: uppercase;
-}
-
-/* ── ТЕЛО АНКЕТЫ ── */
-.sh-body { padding: 24px 54px 44px; }
-
-/* ── ПОЛОСА МИРОВОЗЗРЕНИЯ ── */
-.sh-alignment {
-    background: linear-gradient(135deg, #1a1208 0%, #2a1e0e 100%);
-    padding: 13px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
-    border-left: 4px solid var(--gold);
-    box-shadow: inset 0 1px 0 rgba(200,168,75,0.1);
-}
-.sh-align-icon   { font-size: 24px; flex-shrink: 0; line-height: 1; }
-.sh-align-label  {
-    font-family: var(--font-heading);
-    font-size: 0.52rem;
-    letter-spacing: 0.3em;
     color: var(--gold-dark);
-    text-transform: uppercase;
-    margin-bottom: 3px;
-}
-.sh-align-value  {
-    font-family: var(--font-display);
-    font-size: 0.88rem;
-    color: var(--text-white);
-    font-weight: 700;
-}
-.sh-align-desc {
-    margin-left: auto;
-    text-align: right;
-    color: var(--parchment-dark);
-    font-style: italic;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    max-width: 200px;
 }
 
-/* ── ХАРАКТЕРИСТИКИ ── */
-.sh-stats {
-    display: grid;
-    gap: 1px;
-    background: var(--gold-dark);
-    border: 1px solid var(--gold-dark);
-    margin-bottom: 24px;
+.sh-seal-style-wax {
+    background: radial-gradient(circle, #7a1c1c 0%, #3a0a0a 100%);
+    color: var(--gold-light);
 }
-.sh-stat {
-    background: linear-gradient(160deg, #f5e8b0 0%, #e8d080 100%);
-    padding: 11px 6px;
-    text-align: center;
+.sh-seal-style-steel {
+    background: radial-gradient(circle, #77808b 0%, #2e333a 100%);
+    color: #e8edf2;
+    border-color: #95a2b0;
 }
-.sh-stat-val {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1;
+.sh-seal-style-arcane {
+    background: radial-gradient(circle, #6438b0 0%, #24133f 100%);
+    color: #dcc9ff;
+    border-color: #8a63d4;
 }
-.sh-stat-lbl {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    letter-spacing: 0.18em;
-    color: var(--gold-dark);
-    text-transform: uppercase;
-    margin-top: 4px;
+.sh-seal-style-jade {
+    background: radial-gradient(circle, #2f7f66 0%, #173a2f 100%);
+    color: #d5f6df;
+    border-color: #58ad8b;
 }
 
-/* ── ДВУХКОЛОНОЧНАЯ СЕКЦИЯ ── */
-.sh-two-col {
-    display: grid;
-    gap: 28px;
-    margin-bottom: 20px;
-}
-
-/* ── СЕКЦИЯ С ЗАГОЛОВКОМ ── */
-.sh-section { margin-bottom: 18px; }
-
-.sh-section-hdr {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 7px;
-}
-.sh-section-hdr::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--gold-dark), transparent);
-    opacity: 0.4;
-}
-.sh-section-icon  { font-size: 13px; opacity: 0.55; line-height: 1; }
+/* Generic blocks */
+.sh-section { margin-bottom: 16px; }
 .sh-section-title {
     font-family: var(--font-heading);
-    font-size: 0.56rem;
-    letter-spacing: 0.3em;
-    color: var(--blood);
+    font-size: 0.54rem;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    font-weight: 700;
-    white-space: nowrap;
+    color: var(--blood);
+    margin-bottom: 7px;
 }
+
 .sh-text {
-    font-size: 0.94rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.68;
     color: var(--ink-light);
 }
 
-/* ── СНАРЯЖЕНИЕ ── */
+.sh-kv-grid {
+    border: 1px solid rgba(139, 90, 20, 0.45);
+    display: grid;
+    gap: 6px;
+    background: transparent;
+    padding: 6px;
+}
+
+.sh-kv-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.45));
+    border: 1px solid rgba(139, 90, 20, 0.2);
+    padding: 8px 10px;
+}
+
+.sh-kv-key {
+    font-family: var(--font-heading);
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(26, 18, 8, 0.86);
+    text-shadow: none;
+}
+
+.sh-kv-val {
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--ink);
+    min-width: 46px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    background: rgba(139, 90, 20, 0.11);
+    border: 1px solid rgba(139, 90, 20, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sh-equip-list { display: grid; gap: 8px; }
 .sh-equip-item {
     display: flex;
     gap: 10px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--ink-light);
+    align-items: flex-start;
 }
 .sh-equip-bullet {
-    flex-shrink: 0;
-    color: var(--gold-dark);
-    font-size: 1rem;
-    line-height: 1.55;
     width: 18px;
     text-align: center;
+    color: var(--gold-dark);
+    line-height: 1.5;
 }
 .sh-equip-name {
     font-family: var(--font-heading);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 2px;
+}
+.sh-equip-desc {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.55;
+}
+
+.sh-quote {
+    margin-top: 12px;
+    border-left: 3px solid var(--gold-dark);
+    background: rgba(139, 90, 20, 0.06);
+    padding: 10px 14px;
+    font-style: italic;
+    color: var(--ink);
+}
+
+/* Classic layout */
+.sh-classic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* Passport layout */
+.sh-passport-top {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.sh-passport-main {
+    border: 1px solid var(--gold-dark);
+    background: rgba(255, 255, 255, 0.32);
+    padding: 12px 14px 10px;
+}
+
+.sh-passport-fio {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.sh-passport-rank {
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blood);
+    margin-bottom: 6px;
+}
+
+.sh-passport-org {
+    font-family: var(--font-heading);
+    font-size: 0.56rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+}
+
+.sh-passport-kv {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    border-top: 1px dashed rgba(139, 90, 20, 0.45);
+    border-bottom: 1px dashed rgba(139, 90, 20, 0.45);
+    padding: 8px 0;
+}
+.sh-passport-kv span {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    color: var(--gold-dark);
+    margin-right: 6px;
+}
+
+.sh-passport-photo-box {
+    width: 220px;
+    height: 220px;
+    border: 1px solid var(--gold-dark);
+    outline: 1px solid rgba(0, 0, 0, 0.45);
+    outline-offset: -5px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background: #1b1307;
+}
+
+.sh-passport-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    transform-origin: center center;
+}
+
+.sh-passport-photo-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-dark);
+    font-family: var(--font-heading);
+    letter-spacing: 0.22em;
+    font-size: 0.56rem;
+}
+
+/* Brief layout (combat/arcane) */
+.sh-brief-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+    border: 1px solid var(--gold-dark);
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.sh-brief-item {
+    border: 1px solid var(--gold-dark);
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.28);
+}
+.sh-brief-item span {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 3px;
+}
+.sh-brief-item b {
+    font-family: var(--font-body);
     font-weight: 600;
     color: var(--ink);
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 1px;
 }
 
-/* ── ИТОГОВАЯ ЦИТАТА ── */
-.sh-quote {
-    border-left: 3px solid var(--gold-dark);
-    padding: 10px 18px;
-    margin: 16px 0;
-    background: rgba(139,90,20,0.055);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink);
-    line-height: 1.75;
+.sh-brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 12px;
 }
 
-/* ── ПОДВАЛ АНКЕТЫ ── */
+.sheet[data-type="combat"] .sh-brief-item span,
+.sheet[data-type="arcane"] .sh-brief-item span {
+    color: var(--blood);
+}
+
+.sheet[data-type="combat"] .sh-section-title,
+.sheet[data-type="arcane"] .sh-section-title {
+    letter-spacing: 0.18em;
+}
+
+/* Footer */
 .sh-footer {
     border-top: 1px solid var(--gold-dark);
-    padding: 15px 54px;
+    padding: 14px 54px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -282,46 +353,117 @@
 .sh-footer-text {
     font-family: var(--font-heading);
     font-size: 0.48rem;
-    letter-spacing: 0.2em;
-    color: var(--gold-dark);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--gold-dark);
+}
+
+.sh-footer-seal-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sh-footer-seal-text {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
 }
 .sh-footer-seal {
-    width: 26px; height: 26px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background: var(--gold-dark);
-    opacity: 0.35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gold-dark);
 }
+.sh-footer-seal svg { width: 18px; height: 18px; }
 
-/* ══════════════════════════════════════════════
-   SVG ОРНАМЕНТЫ (вставляются через JS)
-══════════════════════════════════════════════ */
-
-/* Стили для тем переопределяют переменные ниже */
-.sheet[data-theme="medieval"] { /* дефолт — ничего дополнительного */ }
-
+/* Themes */
 .sheet[data-theme="arcane"] {
-    background: linear-gradient(160deg, #1a1228 0%, #0e0818 50%, #150e20 100%);
-    color: #d0c0f0;
-    --ink: #d0c0f0;
-    --ink-light: #b0a0d0;
-    --gold: #9060d0;
-    --gold-dark: #6040a0;
-    --gold-light: #c090ff;
-    --blood: #4040a0;
-    --parchment-dark: #604080;
+    background: linear-gradient(160deg, #1a1228 0%, #0e0818 52%, #150e22 100%);
+    --ink: #d7c9ff;
+    --ink-light: #baa6e8;
+    --gold-dark: #7f66bf;
+    --blood: #a88fff;
 }
-
+.sheet[data-theme="arcane"] .sh-kv-row {
+    background: linear-gradient(90deg, rgba(43, 29, 69, 0.86), rgba(31, 20, 54, 0.9));
+    border-color: rgba(138, 99, 212, 0.35);
+}
+.sheet[data-theme="arcane"] .sh-kv-key {
+    color: #e4d2ff;
+    text-shadow: none;
+}
+.sheet[data-theme="arcane"] .sh-kv-val {
+    color: #f0e8ff;
+    background: rgba(138, 99, 212, 0.24);
+    border-color: rgba(168, 143, 230, 0.5);
+    box-shadow: inset 0 1px 0 rgba(238, 226, 255, 0.18);
+}
 .sheet[data-theme="nordic"] {
-    background: linear-gradient(160deg, #e8e0d0 0%, #d8ceb8 40%, #e0d4b8 100%);
-    --gold: #8a6a28;
-    --gold-dark: #5a4010;
-    --blood: #5a1010;
+    background: linear-gradient(160deg, #efe4cf 0%, #decba8 46%, #e7d5b3 100%);
+    --gold-dark: #7a5f2e;
+}
+.sheet[data-theme="oriental"] {
+    background: linear-gradient(160deg, #fff3df 0%, #f4e0bf 48%, #f3d5a6 100%);
+    --gold-dark: #9a4a1a;
+    --blood: #b03320;
 }
 
-.sheet[data-theme="oriental"] {
-    background: linear-gradient(160deg, #fdf0e0 0%, #f0e0c0 50%, #e8d0a0 100%);
-    --gold: #c04000;
-    --gold-dark: #8a2800;
-    --blood: #800000;
+/* Mobile */
+@media (max-width: 900px) {
+    .sheet {
+        width: 100%;
+        max-width: 760px;
+    }
+    .sh-header {
+        padding: 32px 18px 18px;
+    }
+    .sh-name {
+        font-size: 1.7rem;
+    }
+    .sh-seal {
+        position: static;
+        transform: none;
+        margin: 0 auto 8px;
+    }
+    .sh-body {
+        padding: 16px;
+    }
+    .sh-footer {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .sh-classic-grid,
+    .sh-brief-grid {
+        grid-template-columns: 1fr;
+    }
+    .sh-brief-head {
+        grid-template-columns: 1fr;
+    }
+    .sh-passport-top {
+        grid-template-columns: 1fr;
+    }
+    .sh-passport-photo-box {
+        width: 100%;
+        height: min(70vw, 320px);
+    }
+
+    .sh-corner {
+        width: 42px;
+        height: 42px;
+    }
+
+    .sh-passport-main {
+        padding: 10px;
+    }
+
+    .sh-passport-fio {
+        font-size: 1.45rem;
+    }
 }
