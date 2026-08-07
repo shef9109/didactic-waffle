@@ -47,7 +47,7 @@ character-sheet/
 
 ## GitHub Pages
 
-Сайт доступен по адресу: `https://<твой-логин>.github.io/character-sheet/`
+Сайт доступен по адресу: `https://shef9109.github.io/character-sheet/`
 
 ## Технологии
 
